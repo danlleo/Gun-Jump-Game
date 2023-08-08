@@ -5,12 +5,14 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private Transform _projectileSpawnPoint;
+    [SerializeField] private AudioClip _shotClip;
 
     private Rigidbody _rb;
 
     private float _torque = 120f;
     private float _maxAngularVelocity = 10f;
     private float _bounceBackForce = 50f;
+    private float _jumpUpForce = 2.25f;
 
     private void Awake()
     {
@@ -34,6 +36,8 @@ public class Gun : MonoBehaviour
 
     private void ShootProjectile()
     {
+        AudioSource.PlayClipAtPoint(_shotClip, transform.position);
+
         Projectile projectile = Instantiate(_projectilePrefab, _projectileSpawnPoint.position, Quaternion.identity);
         projectile.Initialize(transform.forward);
     }
@@ -51,7 +55,7 @@ public class Gun : MonoBehaviour
     {
         Vector3 verticalMultiplier = Vector3.Dot(Vector3.up, -transform.forward) < 0
             ? Vector3.zero
-            : Vector3.up;
+            : Vector3.up * _jumpUpForce;
 
         _rb.velocity = Vector3.zero;
         _rb.AddForce((-transform.forward + verticalMultiplier) * _bounceBackForce);
