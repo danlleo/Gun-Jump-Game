@@ -9,10 +9,11 @@ public class Gun : MonoBehaviour
 
     private Rigidbody _rb;
 
-    private float _torque = 120f;
+    private float _torque = 140f;
     private float _maxAngularVelocity = 10f;
-    private float _bounceBackForce = 50f;
+    private float _bounceBackForce = 40f;
     private float _jumpUpForce = 2.25f;
+    private float _maxHeight = 5.5f;
 
     private void Awake()
     {
@@ -53,11 +54,13 @@ public class Gun : MonoBehaviour
 
     private void BounceBack()
     {
-        Vector3 verticalMultiplier = Vector3.Dot(Vector3.up, -transform.forward) < 0
+        float heightMultiplier = Mathf.InverseLerp(_maxHeight, 0, transform.position.y);
+        
+        Vector3 forceMultiplier = Vector3.Dot(Vector3.up, -transform.forward) < 0
             ? Vector3.zero
-            : Vector3.up * _jumpUpForce;
+            : _jumpUpForce * heightMultiplier * Vector3.up;
 
         _rb.velocity = Vector3.zero;
-        _rb.AddForce((-transform.forward + verticalMultiplier) * _bounceBackForce);
+        _rb.AddForce((-transform.forward + forceMultiplier) * _bounceBackForce);
     }
 }
