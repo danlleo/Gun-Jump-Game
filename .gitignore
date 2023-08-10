@@ -70,3 +70,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 [Aa]ssets/[Ss]treamingAssets/aa.meta
 [Aa]ssets/[Ss]treamingAssets/aa/*
+
+/Gun Jump/Assets/Models
+/Gun Jump/Assets/Sounds
+/Gun Jump/Assets/Thirdparty
+/Gun Jump/Assets/Animations
