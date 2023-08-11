@@ -33,8 +33,11 @@ public class Projectile : MonoBehaviour
         DoRicochet(surfaceNormal);
     }
 
-    public void Initialize(Vector3 direction)
-        => _direction = direction;
+    public void Initialize(Vector3 direction, Vector3 startPosition)
+    {
+        _direction = direction;
+        transform.position = startPosition;
+    }
 
     private void DoRicochet(Vector3 surfaceNormal)
     {

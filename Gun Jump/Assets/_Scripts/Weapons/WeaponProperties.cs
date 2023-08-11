@@ -7,6 +7,7 @@ public struct WeaponProperties
     public float Torque;
     public float MaxJumpHeight;
     public float JumpForce;
+    public float SideForce;
     public float BounceBackForce;
     public Transform ProjectileSpawnPoint;
 }

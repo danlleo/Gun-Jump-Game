@@ -12,12 +12,14 @@ public abstract class Weapon : MonoBehaviour
     {
         float heightMultiplier = Mathf.InverseLerp(Properties.MaxJumpHeight, 0, transform.position.y);
 
-        Vector3 forceMultiplier = Vector3.Dot(Vector3.up, -transform.forward) < 0
+        Vector3 heightForce = Vector3.Dot(Vector3.up, -transform.forward) < 0
             ? Vector3.zero
             : Properties.JumpForce * heightMultiplier * Vector3.up;
 
+        Vector3 sideForce = Properties.SideForce * Vector3.Dot(Vector3.forward, Properties.ProjectileSpawnPoint.forward) * Vector3.forward;
+
         RB.velocity = Vector3.zero;
-        RB.AddForce((-transform.forward + forceMultiplier) * Properties.BounceBackForce);
+        RB.AddForce((-transform.forward + heightForce - sideForce) * Properties.BounceBackForce);
     }
 
     protected virtual void ApplyTorque()

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
-    [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private AudioClip _shotClip;
     [SerializeField] private WeaponProperties _pistolProperties;
 
@@ -31,7 +30,15 @@ public class Pistol : Weapon
     {
         AudioSource.PlayClipAtPoint(_shotClip, transform.position);
 
-        Projectile projectile = Instantiate(_projectilePrefab, _pistolProperties.ProjectileSpawnPoint.position, Quaternion.identity);
-        projectile.Initialize(transform.forward);
+        Projectile projectile = ProjectilePool.Instance.GetPooledObject();
+        projectile.Initialize(transform.forward, _pistolProperties.ProjectileSpawnPoint.position);
+
+        if (Physics.Raycast(_pistolProperties.ProjectileSpawnPoint.position, _pistolProperties.ProjectileSpawnPoint.forward, out RaycastHit hitInfo, float.MaxValue))
+        {
+            if (hitInfo.collider.TryGetComponent(out Enemy enemy))
+            {
+                SlowMotionController.Instance.TriggerSlowMotion(.3f, .2f);
+            }
+        }
     }
 }
