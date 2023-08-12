@@ -71,7 +71,10 @@ crashlytics-build.properties
 [Aa]ssets/[Ss]treamingAssets/aa.meta
 [Aa]ssets/[Ss]treamingAssets/aa/*
 
+# Custom written ignores
 /Gun Jump/Assets/Models
 /Gun Jump/Assets/Sounds
 /Gun Jump/Assets/Thirdparty
 /Gun Jump/Assets/Animations
+/Gun Jump/Assets/google-services.json
+/Gun Jump/Assets/google-services.json.meta

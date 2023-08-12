@@ -1,50 +1,88 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private Transform _hitCheckPointTransform;
+
     private Vector3 _direction;
-    private Rigidbody _rb;
+    private Camera _camera;
 
     private float _moveSpeed = 5f;
     private float _bounceAngleDeviation = 30f;
+    private float _hitCheckDistance = .15f;
 
     private int _maxBounceCount = 3;
     private int _bounceCount;
 
+    private int _screenWidth;
+    private int _screenHeight;
+
+    private bool _canRicochet;
+
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        _camera = Camera.main;
+        _screenWidth = Screen.width;
+        _screenHeight = Screen.height;
     }
 
-    private void FixedUpdate()
-        => Move();
-
-    private void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        if (collision.contacts.Length == 0)
-            return;
-
-        if (_bounceCount >= _maxBounceCount)
-            Destroy(gameObject);
-
-        _bounceCount++;
-        Vector3 surfaceNormal = collision.contacts[0].normal;
-        DoRicochet(surfaceNormal);
+        CheckScreenBoundaries();
+        CheckHit();
+        Move();
     }
 
-    public void Initialize(Vector3 direction, Vector3 startPosition)
+    public void Initialize(Vector3 direction, Vector3 startPosition, bool canRicochet)
     {
         _direction = direction;
         transform.position = startPosition;
+        _canRicochet = canRicochet;
     }
 
     private void DoRicochet(Vector3 surfaceNormal)
     {
+        if (_bounceCount >= _maxBounceCount)
+            ProjectilePool.Instance.ReturnToPool(this);
+
+        _bounceCount++;
         _direction = Vector3.Reflect(_direction, surfaceNormal);
         _direction = Quaternion.Euler(Random.Range(-_bounceAngleDeviation, _bounceAngleDeviation), 0f, 0f) * _direction;
     }
 
     private void Move()
-        => _rb.velocity = _direction * _moveSpeed;
+        => transform.Translate(_moveSpeed * Time.deltaTime * _direction);
+
+    private void CheckHit()
+    {
+        if (!Physics.Raycast(_hitCheckPointTransform.position, _direction, out RaycastHit hitInfo, _hitCheckDistance))
+            return;
+
+        if (hitInfo.collider.TryGetComponent(out Projectile projectile))
+            return;
+
+        if (hitInfo.collider.TryGetComponent(out IHittable hittable))
+        {
+            hittable.OnHit(this);
+            return;
+        }
+
+        if (!_canRicochet)
+        {
+            ProjectilePool.Instance.ReturnToPool(this);
+            return;
+        }
+
+        DoRicochet(hitInfo.normal);
+    }
+
+    private void CheckScreenBoundaries()
+    {
+        Vector3 screenPosition = _camera.WorldToScreenPoint(transform.position);
+
+        if (Mathf.Abs(screenPosition.x) > _screenWidth || Mathf.Abs(screenPosition.y) > _screenHeight)
+        {
+            ProjectilePool.Instance.ReturnToPool(this);
+        }
+    }
 }

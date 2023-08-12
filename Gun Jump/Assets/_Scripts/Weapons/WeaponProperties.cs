@@ -9,5 +9,6 @@ public struct WeaponProperties
     public float JumpForce;
     public float SideForce;
     public float BounceBackForce;
+    public bool ProjectilesCanRicochet;
     public Transform ProjectileSpawnPoint;
 }

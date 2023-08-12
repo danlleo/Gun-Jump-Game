@@ -29,6 +29,6 @@ public class Shotgun : Weapon
     protected override void Fire()
     {
         Projectile projectile = Instantiate(_projectilePrefab, _shotgunProperties.ProjectileSpawnPoint.position, Quaternion.identity);
-        projectile.Initialize(transform.forward, _shotgunProperties.ProjectileSpawnPoint.position);
+        projectile.Initialize(transform.forward, _shotgunProperties.ProjectileSpawnPoint.position, _shotgunProperties.ProjectilesCanRicochet);
     }
 }

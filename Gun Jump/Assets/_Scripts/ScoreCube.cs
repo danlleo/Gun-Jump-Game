@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ScoreCube : MonoBehaviour
+public class ScoreCube : MonoBehaviour, IHittable
 {
     public static event EventHandler OnProjectileHitScoreCube;
 
@@ -24,18 +24,13 @@ public class ScoreCube : MonoBehaviour
         _canDestroy = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnHit(Projectile projectile)
     {
         if (!_canDestroy)
             return;
 
-        if (collision.collider.TryGetComponent(out Projectile projectile))
-        {
-            OnProjectileHitScoreCube?.Invoke(this, EventArgs.Empty);
-
-            Destroy(projectile.gameObject);
-            Destroy(gameObject);
-            EarningManager.CalculateReceivedMoneyFromScoreCube(_moneyMultiplierAmount);
-        }
+        Destroy(gameObject);
+        ProjectilePool.Instance.ReturnToPool(projectile);
+        EarningManager.CalculateReceivedMoneyFromScoreCube(_moneyMultiplierAmount);
     }
 }

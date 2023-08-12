@@ -2,24 +2,19 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IHittable
 {
     public event EventHandler OnEnemyHit;
 
     [SerializeField] private CapsuleCollider _enemyCapsuleCollider;
 
     private void Awake()
-    {
-        _enemyCapsuleCollider = GetComponent<CapsuleCollider>();
-    }
+        => _enemyCapsuleCollider = GetComponent<CapsuleCollider>();
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnHit(Projectile projectile)
     {
-        if (collision.collider.TryGetComponent(out Projectile projectile))
-        {
-            Destroy(projectile.gameObject);
-            OnEnemyHit?.Invoke(this, EventArgs.Empty);
-            _enemyCapsuleCollider.enabled = false;
-        }
+        ProjectilePool.Instance.ReturnToPool(projectile);
+        OnEnemyHit?.Invoke(this, EventArgs.Empty);
+        _enemyCapsuleCollider.enabled = false;
     }
 }
