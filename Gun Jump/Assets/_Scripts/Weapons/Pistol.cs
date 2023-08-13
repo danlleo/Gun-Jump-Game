@@ -4,6 +4,7 @@ public class Pistol : Weapon
 {
     [SerializeField] private AudioClip _shotClip;
     [SerializeField] private WeaponProperties _pistolProperties;
+    [SerializeField] private ParticleSystem _muzzleFlashEffect;
 
     private Rigidbody _rb;
 
@@ -21,14 +22,15 @@ public class Pistol : Weapon
             BounceBack();
         }
     }
-    
+
     protected override Rigidbody RB => _rb;
 
     protected override WeaponProperties Properties => _pistolProperties;
 
     protected override void Fire()
     {
-        AudioSource.PlayClipAtPoint(_shotClip, transform.position);
+        _muzzleFlashEffect.Play();
+        SoundManager.Instance.PlaySound(_shotClip);
 
         Projectile projectile = ProjectilePool.Instance.GetPooledObject();
         projectile.Initialize(transform.forward, _pistolProperties.ProjectileSpawnPoint.position, _pistolProperties.ProjectilesCanRicochet);

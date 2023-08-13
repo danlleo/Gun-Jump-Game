@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private AudioClip _impactClip;
     [SerializeField] private Transform _hitCheckPointTransform;
+    [SerializeField] private Transform _hitImpactEffectPrefab;
 
     private Vector3 _direction;
     private Camera _camera;
@@ -25,6 +27,9 @@ public class Projectile : MonoBehaviour
         _screenWidth = Screen.width;
         _screenHeight = Screen.height;
     }
+
+    private void OnEnable()
+        => _bounceCount = 0;
 
     private void Update()
     {
@@ -58,7 +63,10 @@ public class Projectile : MonoBehaviour
         if (!Physics.Raycast(_hitCheckPointTransform.position, _direction, out RaycastHit hitInfo, _hitCheckDistance))
             return;
 
-        if (hitInfo.collider.TryGetComponent(out Projectile projectile))
+        InstantiateHitImpactEffect(hitInfo.point, hitInfo.normal);
+        SoundManager.Instance.PlaySound(_impactClip);
+
+        if (hitInfo.collider.TryGetComponent(out Projectile _))
             return;
 
         if (hitInfo.collider.TryGetComponent(out IHittable hittable))
@@ -75,6 +83,9 @@ public class Projectile : MonoBehaviour
 
         DoRicochet(hitInfo.normal);
     }
+
+    private void InstantiateHitImpactEffect(Vector3 spawnPosition, Vector3 normal)
+        => Instantiate(_hitImpactEffectPrefab, spawnPosition, Quaternion.LookRotation(normal));
 
     private void CheckScreenBoundaries()
     {

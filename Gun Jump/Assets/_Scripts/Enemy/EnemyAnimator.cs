@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Animator))]
-[RequireComponent (typeof(Enemy))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Enemy))]
 public class EnemyAnimator : MonoBehaviour
 {
     private Animator _animator;

@@ -45,7 +45,7 @@ public class LevelUI : MonoBehaviour
 
     private void AdjustProgressBarBasedOnPlayerPosition()
     {
-        _progressBarForeground.fillAmount = 
+        _progressBarForeground.fillAmount =
             Mathf.InverseLerp(_levelStartPosition.position.z, _levelEndPosition.position.z, _weapon.transform.position.z);
     }
 }

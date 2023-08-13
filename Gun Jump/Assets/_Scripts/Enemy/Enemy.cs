@@ -17,4 +17,10 @@ public class Enemy : MonoBehaviour, IHittable
         OnEnemyHit?.Invoke(this, EventArgs.Empty);
         _enemyCapsuleCollider.enabled = false;
     }
+
+    public void OnHit()
+    {
+        OnEnemyHit?.Invoke(this, EventArgs.Empty);
+        _enemyCapsuleCollider.enabled = false;
+    }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public abstract class Weapon : MonoBehaviour
 {
     protected abstract Rigidbody RB { get; }
@@ -41,7 +41,7 @@ public abstract class Weapon : MonoBehaviour
                 RB.angularVelocity.x,
                 -Properties.MaxAngularVelocity,
                 Properties.MaxAngularVelocity
-            ), 
+            ),
             0f,
             0f
         );

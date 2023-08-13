@@ -33,4 +33,9 @@ public class ScoreCube : MonoBehaviour, IHittable
         ProjectilePool.Instance.ReturnToPool(projectile);
         EarningManager.CalculateReceivedMoneyFromScoreCube(_moneyMultiplierAmount);
     }
+
+    public void OnHit()
+    {
+        return;
+    }
 }

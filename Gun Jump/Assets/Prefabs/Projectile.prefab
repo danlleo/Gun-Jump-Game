@@ -161,7 +161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55af79dc49fecf4387305d623c62f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _impactClip: {fileID: 8300000, guid: 250fe26b3d3f76a4c8ad06d3a59220eb, type: 3}
   _hitCheckPointTransform: {fileID: 5667939352440465295}
+  _hitImpactEffectPrefab: {fileID: 400002, guid: e74af37e539075d428c1f7bd8cdb781d,
+    type: 3}
 --- !u!96 &7122262204888519764
 TrailRenderer:
   serializedVersion: 3
