@@ -24,11 +24,15 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void ApplyTorque()
     {
+        float angularPoint = Mathf.InverseLerp(0, Properties.MaxAngularVelocity, Mathf.Abs(RB.angularVelocity.x));
+        float bonusAmount = Mathf.Lerp(0, Properties.MaxTorqueBonus, angularPoint);
+        float torque = Properties.Torque + bonusAmount;
+
         Vector3 facingDirection = Vector3.Dot(Properties.ProjectileSpawnPoint.forward, Vector3.forward) < 0
                 ? Vector3.left
                 : Vector3.right;
 
-        RB.AddTorque(facingDirection * Properties.Torque);
+        RB.AddTorque(facingDirection * torque);
     }
 
     protected virtual void ClampAngularVelocity()
