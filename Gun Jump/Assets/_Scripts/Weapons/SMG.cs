@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class SMG : Weapon
 {
-    [SerializeField] private WeaponProperties _smgProperties;
+    [SerializeField] private WeaponDetailsSO _smgDetails;
+    [SerializeField] private Transform _projectileSpawnPoint;
 
     private Rigidbody _rb;
 
@@ -29,12 +30,14 @@ public class SMG : Weapon
 
     protected override Rigidbody RB => _rb;
 
-    protected override WeaponProperties Properties => _smgProperties;
+    protected override WeaponDetailsSO WeaponDetails => _smgDetails;
+
+    protected override Transform WeaponProjectileSpawnPoint => _projectileSpawnPoint;
 
     protected override void Fire()
     {
         Projectile projectile = ProjectilePool.Instance.GetPooledObject();
-        projectile.Initialize(transform.forward, _smgProperties.ProjectileSpawnPoint.position, _smgProperties.ProjectilesCanRicochet);
+        projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _smgDetails.ProjectilesCanRicochet);
 
         ResetFireRateTimer();
     }

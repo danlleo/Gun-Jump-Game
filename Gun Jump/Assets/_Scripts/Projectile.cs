@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
         _screenHeight = Screen.height;
     }
 
-    private void OnEnable()
+    private void OnDisable()
         => _bounceCount = 0;
 
     private void Update()

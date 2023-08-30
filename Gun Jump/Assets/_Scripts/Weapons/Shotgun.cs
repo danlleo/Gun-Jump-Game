@@ -4,8 +4,9 @@ public class Shotgun : Weapon
 {
     [SerializeField] private AudioClip _shotClip;
     [SerializeField] private Projectile _projectilePrefab;
-    [SerializeField] private WeaponProperties _shotgunProperties;
+    [SerializeField] private WeaponDetailsSO _shotgunDetails;
     [SerializeField] private ParticleSystem _muzzleFlashEffect;
+    [SerializeField] private Transform _projectileSpawnPoint;
 
     private Rigidbody _rb;
 
@@ -29,7 +30,9 @@ public class Shotgun : Weapon
 
     protected override Rigidbody RB => _rb;
 
-    protected override WeaponProperties Properties => _shotgunProperties;
+    protected override WeaponDetailsSO WeaponDetails => _shotgunDetails;
+
+    protected override Transform WeaponProjectileSpawnPoint => _projectileSpawnPoint;
 
     protected override void Fire()
     {
@@ -42,8 +45,8 @@ public class Shotgun : Weapon
             Projectile projectile = ProjectilePool.Instance.GetPooledObject();
             projectile.Initialize(
                 transform.forward + transform.up * (i % 2 == 0 ? _normalizedProjectileSpreadAngle : -_normalizedProjectileSpreadAngle),
-                _shotgunProperties.ProjectileSpawnPoint.position,
-                _shotgunProperties.ProjectilesCanRicochet
+                _projectileSpawnPoint.position,
+                _shotgunDetails.ProjectilesCanRicochet
             );
         }
     }

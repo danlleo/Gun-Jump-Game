@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
+[DisallowMultipleComponent]
 public class Enemy : MonoBehaviour, IHittable
 {
     public event EventHandler OnEnemyHit;
