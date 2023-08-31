@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
     private void Update()
     {
         CheckScreenBoundaries();
-        CheckHit();
+        CheckForHit();
         Move();
     }
 
@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour
     private void Move()
         => transform.Translate(_moveSpeed * Time.deltaTime * _direction);
 
-    private void CheckHit()
+    private void CheckForHit()
     {
         if (!Physics.Raycast(_hitCheckPointTransform.position, _direction, out RaycastHit hitInfo, _hitCheckDistance))
             return;
@@ -69,7 +69,7 @@ public class Projectile : MonoBehaviour
         if (hitInfo.collider.TryGetComponent(out Projectile _))
             return;
 
-        if (hitInfo.collider.TryGetComponent(out IHittable hittable))
+        if (hitInfo.collider.TryGetComponent(out IHitable hittable))
         {
             hittable.OnHit(this);
             return;

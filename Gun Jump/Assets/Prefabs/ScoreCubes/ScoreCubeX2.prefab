@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 134185901813087131, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.215
+      objectReference: {fileID: 0}
+    - target: {fileID: 221051062809310946, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1518529537868515220, guid: b606cf7a39f0d014eb9e657ab471cecd,
         type: 3}
       propertyPath: _moneyMultiplierAmount
@@ -68,10 +78,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2882925884745222654, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.215
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871816986535774859, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.427
+      objectReference: {fileID: 0}
     - target: {fileID: 8166774200904810368, guid: b606cf7a39f0d014eb9e657ab471cecd,
         type: 3}
       propertyPath: m_Name
       value: ScoreCubeX2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186688815653193715, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.215
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

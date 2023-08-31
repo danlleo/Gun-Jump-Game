@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class ExplosionBarrel : MonoBehaviour, IHittable
+public class ExplosionBarrel : MonoBehaviour, IHitable
 {
     [SerializeField] private Transform _explosionEffectPrefab;
     [SerializeField] private AudioClip _explosionAudioClip;
@@ -36,7 +36,7 @@ public class ExplosionBarrel : MonoBehaviour, IHittable
 
         foreach (var hittableCollider in hittableCollidersInRadius)
         {
-            if (hittableCollider.TryGetComponent(out IHittable hittable))
+            if (hittableCollider.TryGetComponent(out IHitable hittable))
                 hittable.OnHit();
         }
     }

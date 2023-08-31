@@ -23,12 +23,12 @@ public class LevelUI : MonoBehaviour
 
     private void OnEnable()
     {
-        EarningManager.OnReceivedMoney += EarningManager_OnReceivedMoney;
+        Economy.OnReceivedMoney += EarningManager_OnReceivedMoney;
     }
 
     private void OnDisable()
     {
-        EarningManager.OnReceivedMoney -= EarningManager_OnReceivedMoney;
+        Economy.OnReceivedMoney -= EarningManager_OnReceivedMoney;
     }
 
     private void EarningManager_OnReceivedMoney(object sender, EarningManagerEventArgs e)

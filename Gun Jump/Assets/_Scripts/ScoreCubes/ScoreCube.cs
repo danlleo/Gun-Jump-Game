@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 
-public class ScoreCube : MonoBehaviour, IHittable
+public class ScoreCube : MonoBehaviour, IHitable
 {
     public static event EventHandler OnProjectileHitScoreCube;
 
+    [SerializeField] private Transform _cubeTopPosition;
     [SerializeField] int _moneyMultiplierAmount;
 
     private bool _canDestroy = true;
@@ -31,11 +32,14 @@ public class ScoreCube : MonoBehaviour, IHittable
 
         Destroy(gameObject);
         ProjectilePool.Instance.ReturnToPool(projectile);
-        EarningManager.CalculateReceivedMoneyFromScoreCube(_moneyMultiplierAmount);
+        Economy.CalculateReceivedMoneyFromScoreCube(_moneyMultiplierAmount);
     }
 
     public void OnHit()
     {
         return;
     }
+
+    public Vector3 GetCubeTopPosition()
+        => _cubeTopPosition.position;
 }

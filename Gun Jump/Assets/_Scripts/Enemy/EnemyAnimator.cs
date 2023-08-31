@@ -15,15 +15,15 @@ public class EnemyAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        _enemy.OnEnemyHit += Enemy_OnEnemyHit;
+        _enemy.EnemyHitEvent.OnEnemyHit += EnemyHitEvent_OnEnemyHit;
     }
 
     private void OnDisable()
     {
-        _enemy.OnEnemyHit -= Enemy_OnEnemyHit;
+        _enemy.EnemyHitEvent.OnEnemyHit -= EnemyHitEvent_OnEnemyHit;
     }
 
-    private void Enemy_OnEnemyHit(object sender, System.EventArgs e)
+    private void EnemyHitEvent_OnEnemyHit(EnemyHitEvent enemyHitEvent, EnemyHitEventArgs enemyHitEventArgs)
     {
         _animator.SetTrigger(EnemyAnimationParams.OnEnemyHit);
     }

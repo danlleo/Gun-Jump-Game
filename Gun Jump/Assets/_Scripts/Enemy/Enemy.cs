@@ -1,27 +1,47 @@
-using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent (typeof(EnemyHitEvent))]
 [DisallowMultipleComponent]
-public class Enemy : MonoBehaviour, IHittable
+public class Enemy : MonoBehaviour
 {
-    public event EventHandler OnEnemyHit;
+    [HideInInspector] public EnemyHitEvent EnemyHitEvent;
 
-    [SerializeField] private CapsuleCollider _enemyCapsuleCollider;
+    [Tooltip("Populate with the collider responsible to detect bodyshots")]
+    [SerializeField] private CapsuleCollider _enemyBodyCapsuleCollider;
+
+    [Tooltip("Populate with the collider responsible to detect headshots")]
+    [SerializeField] private SphereCollider _enemyHeadSphereCollider;
+
+    private bool _isDead;
 
     private void Awake()
-        => _enemyCapsuleCollider = GetComponent<CapsuleCollider>();
-
-    public void OnHit(Projectile projectile)
     {
-        ProjectilePool.Instance.ReturnToPool(projectile);
-        OnEnemyHit?.Invoke(this, EventArgs.Empty);
-        _enemyCapsuleCollider.enabled = false;
+        EnemyHitEvent = GetComponent<EnemyHitEvent>();
     }
 
-    public void OnHit()
+    private void OnEnable()
     {
-        OnEnemyHit?.Invoke(this, EventArgs.Empty);
-        _enemyCapsuleCollider.enabled = false;
+        EnemyHitEvent.OnEnemyHit += EnemyHitEvent_OnEnemyHit;
+    }
+
+    private void OnDisable()
+    {
+        EnemyHitEvent.OnEnemyHit -= EnemyHitEvent_OnEnemyHit;
+    }
+
+    private void EnemyHitEvent_OnEnemyHit(EnemyHitEvent enemyHitEvent, EnemyHitEventArgs enemyHitEventArgs)
+    {
+        if (_isDead) 
+            return;
+
+        _isDead = true;
+
+        if (enemyHitEventArgs.IsHeadshot)
+            print("Headshot");
+        else
+            print("Bodyshot");
+
+        _enemyBodyCapsuleCollider.enabled = false;
+        _enemyHeadSphereCollider.enabled = false;
     }
 }

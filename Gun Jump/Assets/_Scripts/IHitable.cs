@@ -1,4 +1,4 @@
-public interface IHittable
+public interface IHitable
 {
     public void OnHit();
 

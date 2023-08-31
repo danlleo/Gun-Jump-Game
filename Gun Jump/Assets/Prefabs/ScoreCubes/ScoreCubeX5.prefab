@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1cd43b77b707cc641803d108eac1960a, type: 2}
+    - target: {fileID: 134185901813087131, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
     - target: {fileID: 1518529537868515220, guid: b606cf7a39f0d014eb9e657ab471cecd,
         type: 3}
       propertyPath: _moneyMultiplierAmount
@@ -73,6 +78,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2882925884745222654, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871816986535774859, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.434
+      objectReference: {fileID: 0}
     - target: {fileID: 6142919352205315212, guid: b606cf7a39f0d014eb9e657ab471cecd,
         type: 3}
       propertyPath: m_text
@@ -84,6 +99,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ScoreCubeX5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186688815653193715, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
