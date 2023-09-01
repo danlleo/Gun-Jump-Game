@@ -14,7 +14,7 @@ public class ExplosionBarrel : MonoBehaviour, IHitable
     public void OnHit(Projectile projectile)
     {
         _sphereCollider.enabled = false;
-        SoundManager.Instance.PlaySound(_explosionAudioClip);
+        AudioController.Instance.PlaySound(_explosionAudioClip);
         ProjectilePool.Instance.ReturnToPool(projectile);
         Instantiate(_explosionEffectPrefab, transform.position, Quaternion.identity);
         ApplyHitOnHittableObjectInRadius(2f);
@@ -24,7 +24,7 @@ public class ExplosionBarrel : MonoBehaviour, IHitable
     public void OnHit()
     {
         _sphereCollider.enabled = false;
-        SoundManager.Instance.PlaySound(_explosionAudioClip);
+        AudioController.Instance.PlaySound(_explosionAudioClip);
         Instantiate(_explosionEffectPrefab, transform.position, Quaternion.identity);
         ApplyHitOnHittableObjectInRadius(2f);
         Destroy(gameObject);

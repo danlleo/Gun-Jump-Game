@@ -11,7 +11,10 @@ public abstract class Weapon : MonoBehaviour
     /// <summary>
     /// Fire a projectile from the weapon, implement differently in each sub-class
     /// </summary>
-    protected abstract void Fire();
+    protected virtual void Fire()
+    {
+        WeaponFiredStaticEvent.CallWeaponFiredEvent();
+    }
 
     /// <summary>
     /// Bounces the weapon back according to the shot position

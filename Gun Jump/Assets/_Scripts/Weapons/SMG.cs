@@ -36,6 +36,8 @@ public class SMG : Weapon
 
     protected override void Fire()
     {
+        base.Fire();
+
         Projectile projectile = ProjectilePool.Instance.GetPooledObject();
         projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _smgDetails.ProjectilesCanRicochet);
 

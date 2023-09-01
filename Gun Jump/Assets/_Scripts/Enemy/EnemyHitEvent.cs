@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class EnemyHitEvent : MonoBehaviour
 {
     public event Action<EnemyHitEvent, EnemyHitEventArgs> OnEnemyHit;

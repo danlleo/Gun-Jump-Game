@@ -36,8 +36,10 @@ public class Shotgun : Weapon
 
     protected override void Fire()
     {
+        base.Fire();
+
         _muzzleFlashEffect.Play();
-        SoundManager.Instance.PlaySound(_shotClip);
+        AudioController.Instance.PlaySound(_shotClip);
 
         // Spawn specific bullet amount
         for (int i = 0; i < _maxBulletSpawnCount; i++)

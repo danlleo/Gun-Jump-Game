@@ -32,8 +32,10 @@ public class Pistol : Weapon
 
     protected override void Fire()
     {
+        base.Fire();
+
         _muzzleFlashEffect.Play();
-        SoundManager.Instance.PlaySound(_shotClip);
+        AudioController.Instance.PlaySound(_shotClip);
 
         Projectile projectile = ProjectilePool.Instance.GetPooledObject();
         projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _pistolDetails.ProjectilesCanRicochet);

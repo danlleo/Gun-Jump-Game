@@ -64,7 +64,7 @@ public class Projectile : MonoBehaviour
             return;
 
         InstantiateHitImpactEffect(hitInfo.point, hitInfo.normal);
-        SoundManager.Instance.PlaySound(_impactClip);
+        AudioController.Instance.PlaySound(_impactClip);
 
         if (hitInfo.collider.TryGetComponent(out Projectile _))
             return;

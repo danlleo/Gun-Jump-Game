@@ -11,7 +11,6 @@ public class EnemyBody : MonoBehaviour, IHitable
 
     public void OnHit(Projectile projectile)
     {
-        ProjectilePool.Instance.ReturnToPool(projectile);
         _enemy.EnemyHitEvent.CallEnemyHitEvent(false);
     }
 }
