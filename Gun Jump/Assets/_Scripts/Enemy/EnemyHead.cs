@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class EnemyHead : MonoBehaviour, IHitable
 {
     [SerializeField] private Enemy _enemy;

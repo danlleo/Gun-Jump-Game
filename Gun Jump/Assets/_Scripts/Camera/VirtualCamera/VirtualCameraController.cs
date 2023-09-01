@@ -23,8 +23,6 @@ public class VirtualCameraController : MonoBehaviour
 
     private void WeaponFiredStaticEvent_OnWeaponFired()
     {
-        print("Captured target");
-
         _virtualCamera.Follow = SelectedWeapon.Instance.GetSelectedWeaponTransform();
         _virtualCamera.LookAt = SelectedWeapon.Instance.GetSelectedWeaponTransform();
 

@@ -37,9 +37,9 @@ public class Enemy : MonoBehaviour
         _isDead = true;
 
         if (enemyHitEventArgs.IsHeadshot)
-            EnemyDiedStaticEvent.CallEnemyDiedEvent(true);
+            EnemyDiedStaticEvent.CallEnemyDiedEvent(transform.position, true);
         else
-            EnemyDiedStaticEvent.CallEnemyDiedEvent();
+            EnemyDiedStaticEvent.CallEnemyDiedEvent(transform.position);
 
         _enemyBodyCapsuleCollider.enabled = false;
         _enemyHeadSphereCollider.enabled = false;

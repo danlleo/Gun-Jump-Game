@@ -31,8 +31,6 @@ public class EnemyMultipleKillStreakCounter : MonoBehaviour
     {
         IncreaseKillStreakCount();
 
-        print(_enemyKillStreakCount);
-
         float killStreakCountdownTimer = TIME_BEFORE_STREAK_ENDS_IN_SECONDS;
 
         while (killStreakCountdownTimer > 0)

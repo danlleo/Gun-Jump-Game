@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private AudioClip _impactClip;
@@ -66,6 +67,7 @@ public class Projectile : MonoBehaviour
         InstantiateHitImpactEffect(hitInfo.point, hitInfo.normal);
         AudioController.Instance.PlaySound(_impactClip);
 
+        // If we hit another projectile then ignore 
         if (hitInfo.collider.TryGetComponent(out Projectile _))
             return;
 

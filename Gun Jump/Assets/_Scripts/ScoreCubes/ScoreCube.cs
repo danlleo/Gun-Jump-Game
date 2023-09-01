@@ -1,10 +1,7 @@
-using System;
 using UnityEngine;
 
 public class ScoreCube : MonoBehaviour, IHitable
 {
-    public static event EventHandler OnProjectileHitScoreCube;
-
     [SerializeField] private Transform _cubeTopPosition;
     [SerializeField] int _moneyMultiplierAmount;
 
@@ -12,23 +9,20 @@ public class ScoreCube : MonoBehaviour, IHitable
 
     private void OnEnable()
     {
-        OnProjectileHitScoreCube += ScoreCube_OnProjectileHitScoreCube;
+        ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube += ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
     }
 
     private void OnDisable()
     {
-        OnProjectileHitScoreCube -= ScoreCube_OnProjectileHitScoreCube;
-    }
-
-    private void ScoreCube_OnProjectileHitScoreCube(object sender, EventArgs e)
-    {
-        _canDestroy = false;
+        ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube -= ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
     }
 
     public void OnHit(Projectile projectile)
     {
         if (!_canDestroy)
             return;
+
+        ProjectileHitScoreCubeStaticEvent.CallProjectileHitScoreCubeEvent();
 
         Destroy(gameObject);
         ProjectilePool.Instance.ReturnToPool(projectile);
@@ -42,4 +36,12 @@ public class ScoreCube : MonoBehaviour, IHitable
 
     public Vector3 GetCubeTopPosition()
         => _cubeTopPosition.position;
+    
+    private void ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube()
+    {
+        SetNonDestructible();
+    }
+
+    private void SetNonDestructible()
+        => _canDestroy = false;
 }

@@ -39,13 +39,5 @@ public class Pistol : Weapon
 
         Projectile projectile = ProjectilePool.Instance.GetPooledObject();
         projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _pistolDetails.ProjectilesCanRicochet);
-
-        if (Physics.Raycast(_projectileSpawnPoint.position, _projectileSpawnPoint.forward, out RaycastHit hitInfo, float.MaxValue))
-        {
-            if (hitInfo.collider.TryGetComponent(out Enemy enemy))
-            {
-                SlowMotionController.Instance.TriggerSlowMotion(.3f, .2f);
-            }
-        }
     }
 }
