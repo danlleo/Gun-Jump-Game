@@ -8,11 +8,19 @@ public class ActionTextContainer : MonoBehaviour
     private void OnEnable()
     {
         EnemyDiedStaticEvent.OnEnemyDied += EnemyDiedStaticEvent_OnEnemyDied;
+        ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube += ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
     }
 
     private void OnDisable()
     {
         EnemyDiedStaticEvent.OnEnemyDied -= EnemyDiedStaticEvent_OnEnemyDied;
+        ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube -= ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
+    }
+
+    private void ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube(ProjectileHitScoreCubeEventArgs projectileHitScoreCubeEventArgs)
+    {
+        if (projectileHitScoreCubeEventArgs.CanDestroy)
+            InstantiateScoreCubeText($"X{projectileHitScoreCubeEventArgs.MoneyMultiplierAmount}", transform.position);
     }
 
     private void EnemyDiedStaticEvent_OnEnemyDied(EnemyDiedStaticEventArgs enemyDiedStaticEventArgs)
@@ -30,5 +38,11 @@ public class ActionTextContainer : MonoBehaviour
     {
         ActionText deathText = Instantiate(_actionTextPrefab, transform);
         deathText.Initialize(actionText, worldPosition);
+    }
+
+    private void InstantiateScoreCubeText(string actionText, Vector3 worldPosition)
+    {
+        ActionText scoreCubeText = Instantiate(_actionTextPrefab, transform);
+        scoreCubeText.Initialize(actionText, worldPosition);
     }
 }

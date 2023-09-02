@@ -13,7 +13,7 @@ public abstract class Weapon : MonoBehaviour
     /// </summary>
     protected virtual void Fire()
     {
-        WeaponFiredStaticEvent.CallWeaponFiredEvent();
+        WeaponFiredStaticEvent.CallWeaponFiredEvent(WeaponProjectileSpawnPoint);
     }
 
     /// <summary>

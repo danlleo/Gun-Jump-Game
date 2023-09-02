@@ -8,7 +8,6 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Transform _hitImpactEffectPrefab;
 
     private Vector3 _direction;
-    private Camera _camera;
 
     private float _moveSpeed = 5f;
     private float _bounceAngleDeviation = 30f;
@@ -17,17 +16,7 @@ public class Projectile : MonoBehaviour
     private int _maxBounceCount = 3;
     private int _bounceCount;
 
-    private int _screenWidth;
-    private int _screenHeight;
-
     private bool _canRicochet;
-
-    private void Awake()
-    {
-        _camera = Camera.main;
-        _screenWidth = Screen.width;
-        _screenHeight = Screen.height;
-    }
 
     private void OnDisable()
         => _bounceCount = 0;
@@ -91,9 +80,7 @@ public class Projectile : MonoBehaviour
 
     private void CheckScreenBoundaries()
     {
-        Vector3 screenPosition = _camera.WorldToScreenPoint(transform.position);
-
-        if (Mathf.Abs(screenPosition.x) > _screenWidth || Mathf.Abs(screenPosition.y) > _screenHeight)
+        if (!HelperUtilities.IsObjectWithingScreenBoundaries(transform.position))
         {
             ProjectilePool.Instance.ReturnToPool(this);
         }

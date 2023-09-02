@@ -20,6 +20,16 @@ public class SlowMotionController : Singleton<SlowMotionController>
         _originalFixedDeltaTime = Time.fixedDeltaTime;
     }
 
+    private void OnEnable()
+    {   
+        WeaponFiredStaticEvent.OnWeaponFired += WeaponFiredStaticEvent_OnWeaponFired;
+    }
+
+    private void OnDisable()
+    {
+        WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
+    }
+    
     public void TriggerSlowMotion(float duration, float targetTimeScaleValue)
     {
         targetTimeScaleValue = Mathf.Clamp(targetTimeScaleValue, 0f, 1f);
@@ -28,6 +38,36 @@ public class SlowMotionController : Singleton<SlowMotionController>
             return;
 
         _slowMotionRoutine = StartCoroutine(SlowMotionRoutine(duration, targetTimeScaleValue));
+    }
+
+    private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs weaponFiredEventArgs)
+    {
+        WeaponFiredStaticEvent.OnWeaponFired += WeaponFiredStaticEvent_OnWeaponFired;
+        Ray ray = new Ray(weaponFiredEventArgs.FiredWeaponShootTransform.position, weaponFiredEventArgs.FiredWeaponShootTransform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f))
+        {
+            if (hitInfo.collider == null)
+                return;
+
+            if (hitInfo.collider.TryGetComponent(out EnemyHead enemyHead))
+            {
+                if (!HelperUtilities.IsObjectWithingScreenBoundaries(enemyHead.transform.position))
+                    return;
+
+                TriggerSlowMotion(0.2f, 0.4f);
+                return;
+            }
+
+            if (hitInfo.collider.TryGetComponent(out ScoreCube scoreCube))
+            {
+                if (!HelperUtilities.IsObjectWithingScreenBoundaries(scoreCube.transform.position))
+                    return;
+
+                TriggerSlowMotion(0.2f, 0.4f);
+                return;
+            }
+        }
     }
 
     private IEnumerator SlowMotionRoutine(float duration, float targetTimeScaleValue)

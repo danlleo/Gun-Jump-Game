@@ -1,9 +1,10 @@
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class ScoreCube : MonoBehaviour, IHitable
 {
     [SerializeField] private Transform _cubeTopPosition;
-    [SerializeField] int _moneyMultiplierAmount;
+    [SerializeField] private int _moneyMultiplierAmount;
 
     private bool _canDestroy = true;
 
@@ -22,7 +23,7 @@ public class ScoreCube : MonoBehaviour, IHitable
         if (!_canDestroy)
             return;
 
-        ProjectileHitScoreCubeStaticEvent.CallProjectileHitScoreCubeEvent();
+        ProjectileHitScoreCubeStaticEvent.CallProjectileHitScoreCubeEvent(_moneyMultiplierAmount, transform.position, _canDestroy);
 
         Destroy(gameObject);
         ProjectilePool.Instance.ReturnToPool(projectile);
@@ -34,13 +35,13 @@ public class ScoreCube : MonoBehaviour, IHitable
         return;
     }
 
-    public Vector3 GetCubeTopPosition()
-        => _cubeTopPosition.position;
-    
-    private void ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube()
+    private void ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube(ProjectileHitScoreCubeEventArgs _)
     {
         SetNonDestructible();
     }
+
+    public Vector3 GetCubeTopPosition()
+        => _cubeTopPosition.position;
 
     private void SetNonDestructible()
         => _canDestroy = false;
