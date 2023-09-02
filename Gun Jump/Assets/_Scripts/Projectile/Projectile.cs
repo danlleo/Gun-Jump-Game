@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(TrailRenderer))]
 [DisallowMultipleComponent]
 public class Projectile : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Transform _hitImpactEffectPrefab;
 
     private Vector3 _direction;
+    private TrailRenderer _trailRenderer;
 
     private float _moveSpeed = 5f;
     private float _bounceAngleDeviation = 30f;
@@ -18,14 +20,20 @@ public class Projectile : MonoBehaviour
 
     private bool _canRicochet;
 
+    private void Awake()
+        => _trailRenderer = GetComponent<TrailRenderer>();
+
     private void OnDisable()
-        => _bounceCount = 0;
+    {
+        ClearTrailRenderer();
+        ResetBounceCount();
+    }
 
     private void Update()
     {
-        CheckScreenBoundaries();
         CheckForHit();
         Move();
+        CheckScreenBoundaries();
     }
 
     public void Initialize(Vector3 direction, Vector3 startPosition, bool canRicochet)
@@ -60,7 +68,7 @@ public class Projectile : MonoBehaviour
         if (hitInfo.collider.TryGetComponent(out Projectile _))
             return;
 
-        if (hitInfo.collider.TryGetComponent(out IHitable hittable))
+        if (hitInfo.collider.TryGetComponent(out IHittable hittable))
         {
             hittable.OnHit(this);
             return;
@@ -85,4 +93,10 @@ public class Projectile : MonoBehaviour
             ProjectilePool.Instance.ReturnToPool(this);
         }
     }
+
+    private void ClearTrailRenderer()
+        => _trailRenderer.Clear();
+
+    private void ResetBounceCount()
+        => _bounceCount = 0;
 }

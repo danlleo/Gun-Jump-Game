@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ScoreCube : MonoBehaviour, IHitable
+public class ScoreCube : MonoBehaviour, IHittable
 {
     [SerializeField] private Transform _cubeTopPosition;
     [SerializeField] private int _moneyMultiplierAmount;
@@ -20,14 +20,15 @@ public class ScoreCube : MonoBehaviour, IHitable
 
     public void OnHit(Projectile projectile)
     {
+        ProjectilePool.Instance.ReturnToPool(projectile);
+        
         if (!_canDestroy)
             return;
 
         ProjectileHitScoreCubeStaticEvent.CallProjectileHitScoreCubeEvent(_moneyMultiplierAmount, transform.position, _canDestroy);
+        Economy.CalculateReceivedMoneyFromScoreCube(_moneyMultiplierAmount);
 
         Destroy(gameObject);
-        ProjectilePool.Instance.ReturnToPool(projectile);
-        Economy.CalculateReceivedMoneyFromScoreCube(_moneyMultiplierAmount);
     }
 
     public void OnHit()

@@ -42,7 +42,6 @@ public class SlowMotionController : Singleton<SlowMotionController>
 
     private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs weaponFiredEventArgs)
     {
-        WeaponFiredStaticEvent.OnWeaponFired += WeaponFiredStaticEvent_OnWeaponFired;
         Ray ray = new Ray(weaponFiredEventArgs.FiredWeaponShootTransform.position, weaponFiredEventArgs.FiredWeaponShootTransform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f))
@@ -64,7 +63,7 @@ public class SlowMotionController : Singleton<SlowMotionController>
                 if (!HelperUtilities.IsObjectWithingScreenBoundaries(scoreCube.transform.position))
                     return;
 
-                TriggerSlowMotion(0.2f, 0.4f);
+                TriggerSlowMotion(0.2f, 0.1f);
                 return;
             }
         }

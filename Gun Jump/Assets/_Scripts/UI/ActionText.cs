@@ -32,7 +32,7 @@ public class ActionText : MonoBehaviour
     public void Initialize(string actionText, Vector3 worldTextPosition)
     {
         _textMeshProGUI.text = actionText;
-        _worldTextPosition = worldTextPosition + Vector3.up;
+        _worldTextPosition = worldTextPosition;
     }
 
     private void ShowActionText()

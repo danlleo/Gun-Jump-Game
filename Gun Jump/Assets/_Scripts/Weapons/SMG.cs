@@ -15,7 +15,10 @@ public class SMG : Weapon
 
     private void Update()
     {
-       _fireRateTimer += Time.deltaTime;
+        if (GameManager.Instance.CurrentGameState == GameState.GameStarted)
+            return;
+
+        _fireRateTimer += Time.deltaTime;
     
         if (PlayerInputHandler.IsMouseButtonHeldThisFrame())
         {

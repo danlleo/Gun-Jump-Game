@@ -14,6 +14,9 @@ public class Pistol : Weapon
 
     private void Update()
     {
+        if (GameManager.Instance.CurrentGameState == GameState.GameEnded)
+            return;
+
         ClampAngularVelocity();
 
         if (PlayerInputHandler.IsMouseButtonDownThisFrame())

@@ -5,20 +5,20 @@ public static class ProjectileHitScoreCubeStaticEvent
 {
     public static event Action<ProjectileHitScoreCubeEventArgs> OnProjectileHitScoreCube;
 
-    public static void CallProjectileHitScoreCubeEvent(int moneyMultiplierAmount, Vector3 worldPosition, bool canDestroy)
-        => OnProjectileHitScoreCube?.Invoke(new ProjectileHitScoreCubeEventArgs(moneyMultiplierAmount, worldPosition, canDestroy));
+    public static void CallProjectileHitScoreCubeEvent(int moneyMultiplierAmount, Vector3 scoreCubeWorldPosition, bool canDestroy)
+        => OnProjectileHitScoreCube?.Invoke(new ProjectileHitScoreCubeEventArgs(moneyMultiplierAmount, scoreCubeWorldPosition, canDestroy));
 }
 
 public class ProjectileHitScoreCubeEventArgs : EventArgs
 {
     public int MoneyMultiplierAmount;
-    public Vector3 WorldPosition;
+    public Vector3 ScoreCubeWorldPosition;
     public bool CanDestroy;
 
-    public ProjectileHitScoreCubeEventArgs(int moneyMultiplierAmount, Vector3 worldPosition, bool canDestroy)
+    public ProjectileHitScoreCubeEventArgs(int moneyMultiplierAmount, Vector3 scoreCubeWorldPosition, bool canDestroy)
     {
         MoneyMultiplierAmount = moneyMultiplierAmount;
-        WorldPosition = worldPosition;
+        ScoreCubeWorldPosition = scoreCubeWorldPosition;
         CanDestroy = canDestroy;
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class EnemyHead : MonoBehaviour, IHitable
+public class EnemyHead : MonoBehaviour, IHittable
 {
     [SerializeField] private Enemy _enemy;
 
