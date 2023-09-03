@@ -26,7 +26,7 @@ public class ScoreCube : MonoBehaviour, IHittable
             return;
 
         ProjectileHitScoreCubeStaticEvent.CallProjectileHitScoreCubeEvent(_moneyMultiplierAmount, transform.position, _canDestroy);
-        Economy.CalculateReceivedMoneyFromScoreCube(_moneyMultiplierAmount);
+        Economy.CalculateReceivedMoneyFromScoreCubeAndAddToCurrentAmount(_moneyMultiplierAmount);
 
         Destroy(gameObject);
     }

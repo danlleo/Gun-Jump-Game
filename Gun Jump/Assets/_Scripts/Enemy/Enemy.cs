@@ -37,9 +37,15 @@ public class Enemy : MonoBehaviour
         _isDead = true;
 
         if (enemyHitEventArgs.IsHeadshot)
+        {
             EnemyDiedStaticEvent.CallEnemyDiedEvent(transform.position, true);
+            Economy.AddMoneyForKillingEnemy(true);
+        }
         else
+        {
             EnemyDiedStaticEvent.CallEnemyDiedEvent(transform.position);
+            Economy.AddMoneyForKillingEnemy(false);
+        }
 
         _enemyBodyCapsuleCollider.enabled = false;
         _enemyHeadSphereCollider.enabled = false;

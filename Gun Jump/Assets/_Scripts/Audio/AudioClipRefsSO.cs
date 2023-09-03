@@ -14,4 +14,14 @@ public class AudioClipRefsSO : ScriptableObject
     public AudioClip Headshot;
 
     #endregion
+
+    #region ENVIRONMENT AUDIO
+
+    [Space(10)]
+    [Header("Environment Audio")]
+    [Space(5)]
+
+    public AudioClip CoinPickUp;
+
+    #endregion
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class ProjectilePool : Singleton<ProjectilePool>
 {
     [SerializeField] private Projectile _projectilePrefab;

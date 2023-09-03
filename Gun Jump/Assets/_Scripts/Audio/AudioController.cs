@@ -16,12 +16,19 @@ public class AudioController : Singleton<AudioController>
     {
         EnemyMultipleKillStreakEndedStaticEvent.OnEnemyMultipleKillStreakEnded += EnemyMultipleKillStreakEndedStaticEvent_OnEnemyMultipleKillStreakEnded;
         EnemyDiedStaticEvent.OnEnemyDied += EnemyDiedStaticEvent_OnEnemyDied;
+        CoinPickUpStaticEvent.OnCoinPickUp += CoinPickUpStaticEvent_OnCoinPickUp;
     }
 
     private void OnDisable()
     {
         EnemyMultipleKillStreakEndedStaticEvent.OnEnemyMultipleKillStreakEnded -= EnemyMultipleKillStreakEndedStaticEvent_OnEnemyMultipleKillStreakEnded;
         EnemyDiedStaticEvent.OnEnemyDied -= EnemyDiedStaticEvent_OnEnemyDied;
+        CoinPickUpStaticEvent.OnCoinPickUp -= CoinPickUpStaticEvent_OnCoinPickUp;
+    }
+
+    private void CoinPickUpStaticEvent_OnCoinPickUp()
+    {
+        PlaySound(_clipRefs.CoinPickUp, 0.2f);
     }
 
     private void EnemyDiedStaticEvent_OnEnemyDied(EnemyDiedStaticEventArgs enemyDiedStaticEventArgs)

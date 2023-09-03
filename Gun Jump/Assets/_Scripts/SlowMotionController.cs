@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class SlowMotionController : Singleton<SlowMotionController>
 {
     private float _originalTimeScale;
@@ -28,6 +29,8 @@ public class SlowMotionController : Singleton<SlowMotionController>
     private void OnDisable()
     {
         WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
+
+        ResetTimeScaleAndFixedDeltaTime();
     }
     
     public void TriggerSlowMotion(float duration, float targetTimeScaleValue)
@@ -105,5 +108,11 @@ public class SlowMotionController : Singleton<SlowMotionController>
         Time.timeScale = _originalTimeScale;
 
         _slowMotionRoutine = null;
+    }
+
+    private void ResetTimeScaleAndFixedDeltaTime()
+    {
+        Time.fixedDeltaTime = _originalFixedDeltaTime;
+        Time.timeScale = _originalTimeScale;
     }
 }

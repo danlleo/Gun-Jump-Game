@@ -6,8 +6,6 @@ public class EnemyCoinDrop : MonoBehaviour
 {
     private const int COINS_SPAWN_AMOUNT = 7;
 
-    [SerializeField] private GameObject _coinPrefab;
-
     private EnemyHitEvent _enemyHitEvent;
 
     private void Awake()
@@ -27,14 +25,17 @@ public class EnemyCoinDrop : MonoBehaviour
 
     private void EnemyHitEvent_OnEnemyHit(EnemyHitEvent enemyHitEvent, EnemyHitEventArgs enemyHitEventArgs)
     {
-        // SpawnCoins(enemyHitEvent.gameObject.transform.position);
+        SpawnCoins(enemyHitEvent.gameObject.transform.position, SelectedWeapon.Instance.GetSelectedWeaponTransform());
     }
 
-    private void SpawnCoins(Vector3 spawnPosition)
+    private void SpawnCoins(Vector3 spawnPosition, Transform objectToFollow)
     {
         for (int i = 0; i < COINS_SPAWN_AMOUNT; i++)
         {
-            Instantiate(_coinPrefab, spawnPosition, _coinPrefab.transform.rotation);
+            Coin coin = CoinPool.Instance.GetPooledObject();
+
+            coin.Initialize(spawnPosition, Quaternion.identity, objectToFollow);
+            coin.ApplyRandomForceToCoin();
         }
     }
 }

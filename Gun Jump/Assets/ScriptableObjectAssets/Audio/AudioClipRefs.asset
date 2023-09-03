@@ -15,3 +15,4 @@ MonoBehaviour:
   DoubleKill: {fileID: 8300000, guid: ed690559f7d9fb64bb9d755bdf9e6e4e, type: 3}
   TripleKill: {fileID: 8300000, guid: f6a7392ff43cf4f46a002e98d5e6df6a, type: 3}
   Headshot: {fileID: 8300000, guid: fcba996f169d8b7489edbd77ccab8425, type: 3}
+  CoinPickUp: {fileID: 8300000, guid: ad1a5ad108c87914db787c4571248e2e, type: 3}
