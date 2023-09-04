@@ -3,6 +3,7 @@ using System;
 public static class Economy
 {
     public static int CurrentLevelMoneyAmount { private set; get; }
+    public static int TotalMoneyAmountBeforeBeatingLevel { private set; get; }
     public static int TotalMoneyAmount { private set; get; }
 
     public static readonly int DefaultMoneyAmountToAdd = 100;
