@@ -4988,13 +4988,13 @@ GameObject:
   - component: {fileID: 6227182441304032611}
   - component: {fileID: 1372235756304234621}
   - component: {fileID: 822613047946285601}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4575003090164012697
 Transform:
   m_ObjectHideFlags: 0
@@ -5002,8 +5002,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5956377997234933878}
-  m_LocalRotation: {x: 0.014211151, y: -0, z: -0, w: 0.999899}
-  m_LocalPosition: {x: 0.04516589, y: 2.0431988, z: 0.06943377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5012,7 +5012,7 @@ Transform:
   - {fileID: 1832361772727051204}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 1.629, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6227182441304032611
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5074,9 +5074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shotClip: {fileID: 8300000, guid: 8b398524b7a15a14c897e4dd9eecfef5, type: 3}
-  _projectilePrefab: {fileID: 6402226624389856570, guid: 6fe8d539975cf6e48bee32cd42380aa6,
-    type: 3}
-  _shotgunDetails: {fileID: 0}
+  _shotgunDetails: {fileID: 11400000, guid: f58ee9b0fc95284469a5e3336f495545, type: 2}
   _muzzleFlashEffect: {fileID: 2233892163455073775}
   _projectileSpawnPoint: {fileID: 8196390538743314265}
 --- !u!1 &6297758008968691670

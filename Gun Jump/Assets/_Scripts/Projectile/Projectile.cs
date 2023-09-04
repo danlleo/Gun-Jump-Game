@@ -4,6 +4,8 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Projectile : MonoBehaviour
 {
+    public bool CanGoThroughBodies { get; private set; }
+
     [SerializeField] private AudioClip _impactClip;
     [SerializeField] private Transform _hitCheckPointTransform;
     [SerializeField] private Transform _hitImpactEffectPrefab;
@@ -36,11 +38,12 @@ public class Projectile : MonoBehaviour
         CheckScreenBoundaries();
     }
 
-    public void Initialize(Vector3 direction, Vector3 startPosition, bool canRicochet)
+    public void Initialize(Vector3 direction, Vector3 startPosition, bool canRicochet, bool canGoTroughBodies)
     {
         _direction = direction;
         transform.position = startPosition;
         _canRicochet = canRicochet;
+        CanGoThroughBodies = canGoTroughBodies;
     }
 
     private void DoRicochet(Vector3 surfaceNormal)

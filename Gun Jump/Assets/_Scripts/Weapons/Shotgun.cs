@@ -3,7 +3,6 @@ using UnityEngine;
 public class Shotgun : Weapon
 {
     [SerializeField] private AudioClip _shotClip;
-    [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private WeaponDetailsSO _shotgunDetails;
     [SerializeField] private ParticleSystem _muzzleFlashEffect;
     [SerializeField] private Transform _projectileSpawnPoint;
@@ -51,7 +50,8 @@ public class Shotgun : Weapon
             projectile.Initialize(
                 transform.forward + transform.up * (i % 2 == 0 ? _normalizedProjectileSpreadAngle : -_normalizedProjectileSpreadAngle),
                 _projectileSpawnPoint.position,
-                _shotgunDetails.ProjectilesCanRicochet
+                _shotgunDetails.ProjectilesCanRicochet,
+                _shotgunDetails.ProjectilesCanGoTroughBodies
             );
         }
     }

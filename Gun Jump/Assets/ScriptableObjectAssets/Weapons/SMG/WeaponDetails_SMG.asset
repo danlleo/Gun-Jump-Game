@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 925990e1071bd834695a8bca45307308, type: 3}
-  m_Name: WeaponDetails_Shotgun
+  m_Name: WeaponDetails_SMG
   m_EditorClassIdentifier: 
   MaxAngularVelocity: 10
-  Torque: 140
-  MaxTorqueBonus: 150
+  Torque: 20
+  MaxTorqueBonus: 10
   MaxJumpHeight: 5.5
-  JumpForce: 2.25
-  SideForce: 2
-  BounceBackForce: 40
-  ProjectilesCanRicochet: 1
+  JumpForce: 2.5
+  SideForce: 3
+  BounceBackForce: 50
+  ProjectilesCanRicochet: 0
   ProjectilesCanGoTroughBodies: 0

@@ -13,6 +13,10 @@ public class EnemyBody : MonoBehaviour, IHittable
     public void OnHit(Projectile projectile)
     {
         _enemy.EnemyHitEvent.CallEnemyHitEvent(false);
+
+        if (projectile.CanGoThroughBodies)
+            return;
+
         ProjectilePool.Instance.ReturnToPool(projectile);
     }
 }

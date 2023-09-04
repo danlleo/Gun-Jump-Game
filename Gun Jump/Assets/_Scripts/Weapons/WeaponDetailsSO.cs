@@ -26,6 +26,7 @@ public class WeaponDetailsSO : ScriptableObject
     [Space(5)]
 
     public bool ProjectilesCanRicochet;
+    public bool ProjectilesCanGoTroughBodies;
 
     #endregion;
 }

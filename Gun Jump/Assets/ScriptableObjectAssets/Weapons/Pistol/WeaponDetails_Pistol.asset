@@ -20,3 +20,4 @@ MonoBehaviour:
   SideForce: 2
   BounceBackForce: 40
   ProjectilesCanRicochet: 0
+  ProjectilesCanGoTroughBodies: 0

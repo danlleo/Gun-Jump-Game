@@ -15,19 +15,22 @@ public class SMG : Weapon
 
     private void Update()
     {
-        if (GameManager.Instance.CurrentGameState == GameState.GameStarted)
+        if (GameManager.Instance.CurrentGameState == GameState.GameEnded)
             return;
 
         _fireRateTimer += Time.deltaTime;
-    
-        if (PlayerInputHandler.IsMouseButtonHeldThisFrame())
+
+        if (_fireRateTimer < _fireRateTimeInSeconds)
+            return; 
+
+        if (PlayerInputHandler.IsMouseButtonDownThisFrame())
         {
-            if (_fireRateTimer >= _fireRateTimeInSeconds)
-            {
-                Fire();
-                ApplyTorque();
-                BounceBack();
-            }
+            ApplyTorque();
+            BounceBack();
+        }
+        else if (PlayerInputHandler.IsMouseButtonHeldThisFrame())
+        {
+            Fire();
         }
     }
 
@@ -42,7 +45,7 @@ public class SMG : Weapon
         base.Fire();
 
         Projectile projectile = ProjectilePool.Instance.GetPooledObject();
-        projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _smgDetails.ProjectilesCanRicochet);
+        projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _smgDetails.ProjectilesCanRicochet, _smgDetails.ProjectilesCanGoTroughBodies);
 
         ResetFireRateTimer();
     }

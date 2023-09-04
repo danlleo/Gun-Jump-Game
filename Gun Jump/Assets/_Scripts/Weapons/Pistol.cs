@@ -41,6 +41,6 @@ public class Pistol : Weapon
         AudioController.Instance.PlaySound(_shotClip);
 
         Projectile projectile = ProjectilePool.Instance.GetPooledObject();
-        projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _pistolDetails.ProjectilesCanRicochet);
+        projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _pistolDetails.ProjectilesCanRicochet, _pistolDetails.ProjectilesCanGoTroughBodies);
     }
 }
