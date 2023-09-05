@@ -11,4 +11,6 @@ public class SelectedWeapon : Singleton<SelectedWeapon>
 
     public Transform GetSelectedWeaponTransform()
         => _selectedWeapon;
+
+    
 }

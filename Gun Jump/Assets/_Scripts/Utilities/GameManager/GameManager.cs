@@ -3,10 +3,9 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public GameState CurrentGameState { get; private set; }
+    public SaveData SaveGameData { get; private set; }
 
     public int CurrentLevel { get; private set; }
-
-    public SaveData SaveGameData { get; private set; }
 
     protected override void Awake()
     {
@@ -15,6 +14,9 @@ public class GameManager : Singleton<GameManager>
         SaveGameData = SaveLoaderController.Load();
         CurrentGameState = GameState.GameEnded;
         CurrentLevel = SaveGameData.CurrentLevel;
+
+        Economy.CleanCurrentLevelMoneyAmount();
+        Economy.SetTotalMoneyAmount(SaveGameData.MoneyAmount);
     }
 
     private void OnEnable()
@@ -22,6 +24,7 @@ public class GameManager : Singleton<GameManager>
         ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube += ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
         WeaponFiredStaticEvent.OnWeaponFired += WeaponFiredStaticEvent_OnWeaponFired;
         GameEndedStaticEvent.OnGameEnded += GameEndedStaticEvent_OnGameEnded;
+        EconomyMadePurchaseStaticEvent.OnMadePurchase += EconomyMadePurchaseStaticEvent_OnMadePurchase;
     }
 
     private void OnDisable()
@@ -29,7 +32,14 @@ public class GameManager : Singleton<GameManager>
         ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube -= ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
         WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
         GameEndedStaticEvent.OnGameEnded -= GameEndedStaticEvent_OnGameEnded;
+        EconomyMadePurchaseStaticEvent.OnMadePurchase -= EconomyMadePurchaseStaticEvent_OnMadePurchase;
     }
+
+    private void EconomyMadePurchaseStaticEvent_OnMadePurchase()
+    {
+        SaveLoaderController.Save(SaveGameData);
+    }
+
 #if UNITY_EDITOR
     private void Update()
     {
@@ -37,6 +47,7 @@ public class GameManager : Singleton<GameManager>
             SaveLoaderController.DeleteSave();
     }
 #endif
+
     private void GameEndedStaticEvent_OnGameEnded()
     {
         CurrentGameState = GameState.GameEnded;

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f53ab0a46a88144ba24c310ad1f6e76, type: 3}
   m_Name: Weapon_SMG
   m_EditorClassIdentifier: 
-  WeaponName: SMG
-  WeaponID: 25f26048-4bf9-11ee-be56-0242ac120002
-  RequiredLevelToUnlock: 20
-  PriceToUnlock: 50000
-  WeaponDetails: {fileID: 11400000, guid: d9114e8dd8d604e41a5a054e6e6399d2, type: 2}
-  WeaponPrefab: {fileID: 5290984292904378642, guid: 3b081701c3dd78b449d39e08073aa70f,
+  _weaponName: SMG
+  _weaponID: 40a1fa25-18bc-4946-b546-adaeaf0ef0e7
+  _requiredLevelToUnlock: 35
+  _priceToUnlock: 100000
+  _weaponDetails: {fileID: 11400000, guid: d9114e8dd8d604e41a5a054e6e6399d2, type: 2}
+  _weaponPrefab: {fileID: 5290984292904378642, guid: 3b081701c3dd78b449d39e08073aa70f,
     type: 3}

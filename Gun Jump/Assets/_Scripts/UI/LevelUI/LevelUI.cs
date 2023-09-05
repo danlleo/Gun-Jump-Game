@@ -74,12 +74,19 @@ public class LevelUI : MonoBehaviour
     {
         GameEndedStaticEvent.OnGameEnded += GameEndedStaticEvent_OnGameEnded;
         ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube += ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
+        EconomyMadePurchaseStaticEvent.OnMadePurchase += EconomyMadePurchaseStaticEvent_OnMadePurchase;
     }
 
     private void OnDisable()
     {
         GameEndedStaticEvent.OnGameEnded -= GameEndedStaticEvent_OnGameEnded;
         ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube -= ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
+        EconomyMadePurchaseStaticEvent.OnMadePurchase -= EconomyMadePurchaseStaticEvent_OnMadePurchase;
+    }
+
+    private void EconomyMadePurchaseStaticEvent_OnMadePurchase()
+    {
+        UpdateMoneyAmountText(Economy.TotalMoneyAmount);
     }
 
     private void GameEndedStaticEvent_OnGameEnded()

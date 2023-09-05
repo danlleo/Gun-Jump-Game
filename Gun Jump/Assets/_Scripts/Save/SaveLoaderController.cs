@@ -53,8 +53,8 @@ public static class SaveLoaderController
 
         SaveData saveData = new()
         {
-            MoneyAmount = 0,
-            CurrentLevel = 1,
+            MoneyAmount = 100000,
+            CurrentLevel = 20,
             PurchasedWeaponPrefabIDList = new List<string>
             {
                 // Give player only pistol as a default weapon

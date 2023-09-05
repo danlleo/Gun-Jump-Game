@@ -24,4 +24,22 @@ public static class Economy
 
     public static void CleanCurrentLevelMoneyAmount()
         => CurrentLevelMoneyAmount = 0;
+
+    public static void SetTotalMoneyAmount(int totalMoneyAmount)
+    {
+        if (totalMoneyAmount < 0)
+            throw new ArgumentException("Total money amount cannot be less than zero!");
+
+        TotalMoneyAmount = totalMoneyAmount;
+    }
+
+    public static bool TryPurchaseWeapon(int weaponPrice)
+    {
+        if (weaponPrice > TotalMoneyAmount)
+            return false;
+        
+        TotalMoneyAmount -= weaponPrice;
+
+        return true;
+    }
 }
