@@ -3,10 +3,8 @@ using UnityEngine;
 public static class PlayerInputHandler
 {
     public static bool IsMouseButtonDownThisFrame()
-    {
-        return Input.GetMouseButtonDown(0);
-    }
-
+        => Input.GetMouseButtonDown(0);
+ 
     public static bool IsMouseButtonHeldThisFrame()
         => Input.GetMouseButton(0);
 

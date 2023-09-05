@@ -7,11 +7,27 @@ public class WeaponSO : ScriptableObject
     [Header("Weapon")]
     [Space(5)]
 
-    public string WeaponName;
-    public string WeaponID;
-    public int RequiredLevelToUnlock;
-    public int PriceToUnlock;
+    #region VALUES THAT ARE ASSIGNED IN THE INSPECTOR
 
-    public WeaponDetailsSO WeaponDetails;
-    public Weapon WeaponPrefab;
+    [SerializeField] private string _weaponName;
+    [SerializeField] private string _weaponID;
+    [SerializeField] private int _requiredLevelToUnlock;
+    [SerializeField] private int _priceToUnlock;
+
+    [SerializeField] private WeaponDetailsSO _weaponDetails;
+    [SerializeField] private Weapon _weaponPrefab;
+
+    #endregion
+
+    #region REFERENCE VALUES
+
+    public string WeaponName => _weaponName;
+    public string WeaponID => _weaponID;
+    public int RequiredLevelToUnlock => _requiredLevelToUnlock;
+    public int PriceToUnlock => _priceToUnlock;
+
+    public WeaponDetailsSO WeaponDetails => _weaponDetails;
+    public Weapon WeaponPrefab => _weaponPrefab;
+
+    #endregion
 }

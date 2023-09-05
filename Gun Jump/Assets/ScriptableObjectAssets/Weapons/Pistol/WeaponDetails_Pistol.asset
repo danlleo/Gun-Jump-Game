@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925990e1071bd834695a8bca45307308, type: 3}
   m_Name: WeaponDetails_Pistol
   m_EditorClassIdentifier: 
-  MaxAngularVelocity: 10
-  Torque: 140
-  MaxTorqueBonus: 150
-  MaxJumpHeight: 5.5
-  JumpForce: 2.25
-  SideForce: 2
-  BounceBackForce: 40
-  ProjectilesCanRicochet: 0
-  ProjectilesCanGoTroughBodies: 0
+  _maxAngularVelocity: 10
+  _torque: 140
+  _maxTorqueBonus: 150
+  _maxJumpHeight: 5.5
+  _jumpForce: 2.25
+  _sideForce: 2
+  _bounceBackForce: 40
+  _projectilesCanRicochet: 0
+  _projectilesCanGoTroughBodies: 0

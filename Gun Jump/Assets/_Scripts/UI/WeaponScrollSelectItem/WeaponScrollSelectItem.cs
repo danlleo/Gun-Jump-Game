@@ -15,7 +15,7 @@ public class WeaponScrollSelectItem : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        if (_weaponSO.RequiredLevelToUnlock >= GameManager.Instance.CurrentLevel)
+        if (GameManager.Instance.CurrentLevel >= _weaponSO.RequiredLevelToUnlock)
             _availableForPurchaseOrSelect = true;
 
         ApplyStylesAccordingToAvailableState(_availableForPurchaseOrSelect);
@@ -23,7 +23,7 @@ public class WeaponScrollSelectItem : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // ...
+        this.Log(GameManager.Instance.SaveGameData.PurchasedWeaponPrefabIDList.Contains(_weaponSO.WeaponID));
     }
 
     private void ApplyStylesAccordingToAvailableState(bool availableForPurchaseOrSelect)

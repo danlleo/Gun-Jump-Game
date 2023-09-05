@@ -1,18 +1,20 @@
+using UnityEngine;
+
 public class GameManager : Singleton<GameManager>
 {
     public GameState CurrentGameState { get; private set; }
 
     public int CurrentLevel { get; private set; }
 
-    private SaveData _saveData;
+    public SaveData SaveGameData { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
-        _saveData = SaveLoaderController.Load();
+        SaveGameData = SaveLoaderController.Load();
         CurrentGameState = GameState.GameEnded;
-        CurrentLevel = _saveData.CurrentLevel;
+        CurrentLevel = SaveGameData.CurrentLevel;
     }
 
     private void OnEnable()
@@ -28,10 +30,21 @@ public class GameManager : Singleton<GameManager>
         WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
         GameEndedStaticEvent.OnGameEnded -= GameEndedStaticEvent_OnGameEnded;
     }
-
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            SaveLoaderController.DeleteSave();
+    }
+#endif
     private void GameEndedStaticEvent_OnGameEnded()
     {
         CurrentGameState = GameState.GameEnded;
+        IncreaseCurrentLevel();
+
+        SaveGameData.MoneyAmount = Economy.TotalMoneyAmount;
+
+        SaveLoaderController.Save(SaveGameData);
     }
 
     private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs _)
@@ -42,13 +55,12 @@ public class GameManager : Singleton<GameManager>
 
     private void ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube(ProjectileHitScoreCubeEventArgs _)
     {
-        IncreaseCurrentLevel();
         GameEndedStaticEvent.CallGameEndedEvent();
     }
 
     private void IncreaseCurrentLevel()
     {
         CurrentLevel++;
-        _saveData.CurrentLevel = CurrentLevel;
+        SaveGameData.CurrentLevel = CurrentLevel;
     }
 }

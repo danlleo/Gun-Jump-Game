@@ -5,5 +5,5 @@ public class SaveData
 {
     public int MoneyAmount;
     public int CurrentLevel;
-    public HashSet<string> PurchasedWeaponPrefabIDHashSet;
+    public List<string> PurchasedWeaponPrefabIDList;
 }

@@ -14,7 +14,7 @@ public static class SaveLoaderController
         {
             MoneyAmount = passedSaveData.MoneyAmount,
             CurrentLevel = passedSaveData.CurrentLevel,
-            PurchasedWeaponPrefabIDHashSet = passedSaveData.PurchasedWeaponPrefabIDHashSet
+            PurchasedWeaponPrefabIDList = passedSaveData.PurchasedWeaponPrefabIDList
         };
 
         string json = JsonUtility.ToJson(saveData);
@@ -55,7 +55,7 @@ public static class SaveLoaderController
         {
             MoneyAmount = 0,
             CurrentLevel = 1,
-            PurchasedWeaponPrefabIDHashSet = new HashSet<string>
+            PurchasedWeaponPrefabIDList = new List<string>
             {
                 // Give player only pistol as a default weapon
                 "01f01438-4bf9-11ee-be56-0242ac120002",
@@ -70,9 +70,18 @@ public static class SaveLoaderController
         Debug.Log("Game Saved");
 #endif
 
+        Save(saveData);
+
         return saveData;
     }
 
     private static bool SaveExists()
         => File.Exists(s_saveFilePath);
+
+    // !!! REMOVE LATER !!!
+    public static void DeleteSave()
+    {
+        File.Delete(s_saveFilePath);
+        Debug.Log("Save deleted");
+    }
 }

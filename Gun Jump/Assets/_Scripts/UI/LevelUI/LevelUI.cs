@@ -137,6 +137,8 @@ public class LevelUI : MonoBehaviour
         }
     }
 
+    #region ANIMATIONS
+
     private IEnumerator EndGameUIAnimationRoutine(int moneyAmountReceivedFromCurrentLevel, int multiplier)
     {
         yield return new WaitForSeconds(.215f);
@@ -223,4 +225,6 @@ public class LevelUI : MonoBehaviour
         VibrationController.TriggerVibration();
         Destroy(coinIcon.gameObject);
     }
+
+    #endregion
 }
