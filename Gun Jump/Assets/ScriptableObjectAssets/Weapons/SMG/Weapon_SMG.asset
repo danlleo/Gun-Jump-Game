@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Weapon_SMG
   m_EditorClassIdentifier: 
   WeaponName: SMG
+  WeaponID: 25f26048-4bf9-11ee-be56-0242ac120002
+  RequiredLevelToUnlock: 20
+  PriceToUnlock: 50000
   WeaponDetails: {fileID: 11400000, guid: d9114e8dd8d604e41a5a054e6e6399d2, type: 2}
   WeaponPrefab: {fileID: 5290984292904378642, guid: 3b081701c3dd78b449d39e08073aa70f,
     type: 3}
-  RequiredLevelToUnlock: 20

@@ -4,11 +4,15 @@ public class GameManager : Singleton<GameManager>
 
     public int CurrentLevel { get; private set; }
 
+    private SaveData _saveData;
+
     protected override void Awake()
     {
         base.Awake();
+
+        _saveData = SaveLoaderController.Load();
         CurrentGameState = GameState.GameEnded;
-        CurrentLevel = 1;
+        CurrentLevel = _saveData.CurrentLevel;
     }
 
     private void OnEnable()
@@ -43,5 +47,8 @@ public class GameManager : Singleton<GameManager>
     }
 
     private void IncreaseCurrentLevel()
-        => CurrentLevel++;
+    {
+        CurrentLevel++;
+        _saveData.CurrentLevel = CurrentLevel;
+    }
 }

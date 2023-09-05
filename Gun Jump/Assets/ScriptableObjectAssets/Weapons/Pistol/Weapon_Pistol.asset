@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f53ab0a46a88144ba24c310ad1f6e76, type: 3}
   m_Name: Weapon_Pistol
   m_EditorClassIdentifier: 
-  RequiredLevelToUnlock: 1
   WeaponName: Pistol
-  WeaponSprite: {fileID: 21300000, guid: 0f239a73f8bf57649afb5f612345d89f, type: 3}
+  WeaponID: 01f01438-4bf9-11ee-be56-0242ac120002
+  RequiredLevelToUnlock: 1
+  PriceToUnlock: 0
   WeaponDetails: {fileID: 11400000, guid: f6b077aa6620b7249995580bfd838ef4, type: 2}
   WeaponPrefab: {fileID: 5247473114499014130, guid: 16a51fffe58639449b587cb41c85b9c4,
     type: 3}

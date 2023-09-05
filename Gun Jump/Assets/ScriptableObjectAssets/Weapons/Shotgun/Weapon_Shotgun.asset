@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Weapon_Shotgun
   m_EditorClassIdentifier: 
   WeaponName: Shotgun
+  WeaponID: 186f99c2-4bf9-11ee-be56-0242ac120002
+  RequiredLevelToUnlock: 10
+  PriceToUnlock: 15000
   WeaponDetails: {fileID: 11400000, guid: f58ee9b0fc95284469a5e3336f495545, type: 2}
   WeaponPrefab: {fileID: 822613047946285601, guid: 01be85c171e668846bc81807a25c77de,
     type: 3}
-  RequiredLevelToUnlock: 10

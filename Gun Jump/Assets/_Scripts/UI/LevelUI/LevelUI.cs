@@ -33,6 +33,7 @@ public class LevelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _moneyAmountText;
     [SerializeField] private TextMeshProUGUI _moneyAmountReceivedFromCurrentLevelText;
     [SerializeField] private TextMeshProUGUI _moneyMultiplierText;
+    [SerializeField] private TextMeshProUGUI _levelText;
 
     [Space(10)]
     [Header("References To External Objects")]
@@ -59,7 +60,10 @@ public class LevelUI : MonoBehaviour
     }
 
     private void Start()
-        => UpdateMoneyAmountText(Economy.TotalMoneyAmount);
+    {
+        UpdateMoneyAmountText(Economy.TotalMoneyAmount);
+        UpdateLevelText(GameManager.Instance.CurrentLevel);
+    }
 
     private void Update()
     {
@@ -88,6 +92,9 @@ public class LevelUI : MonoBehaviour
 
     private void UpdateMoneyAmountText(int amount)
         => _moneyAmountText.text = $"{amount}";
+
+    private void UpdateLevelText(int level)
+        => _levelText.text = $"{level}";
 
     private void UpdateMoneyMultipliedText(int multiplierAmount)
         => _moneyMultiplierText.text = $"X{multiplierAmount}";

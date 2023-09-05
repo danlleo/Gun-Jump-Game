@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 
+[System.Serializable]
 public class SaveData 
 {
     public int MoneyAmount;
     public int CurrentLevel;
-    public List<int> PurchasedWeaponPrefabIDs;
+    public HashSet<string> PurchasedWeaponPrefabIDHashSet;
 }
