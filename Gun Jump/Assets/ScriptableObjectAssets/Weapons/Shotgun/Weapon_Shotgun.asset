@@ -16,3 +16,4 @@ MonoBehaviour:
   WeaponDetails: {fileID: 11400000, guid: f58ee9b0fc95284469a5e3336f495545, type: 2}
   WeaponPrefab: {fileID: 822613047946285601, guid: 01be85c171e668846bc81807a25c77de,
     type: 3}
+  RequiredLevelToUnlock: 10

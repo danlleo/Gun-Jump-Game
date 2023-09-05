@@ -8,6 +8,8 @@ public class WeaponSO : ScriptableObject
     [Space(5)]
 
     public string WeaponName;
+    public int RequiredLevelToUnlock;
+    public int PriceToUnlock;
     public WeaponDetailsSO WeaponDetails;
     public Weapon WeaponPrefab;
 }

@@ -23,6 +23,8 @@ public class LevelUI : MonoBehaviour
     [SerializeField] private Transform _targetCoinMoveTransform;
     [SerializeField] private Image _progressBarForeground;
     [SerializeField] private Button _continueButton;
+    [SerializeField] private Button _openWeaponStoreButton;
+    [SerializeField] private WeaponStoreScroll _weaponStoreScroll;
 
     [Space(10)]
     [Header("References To UI Text Objects")]
@@ -44,7 +46,15 @@ public class LevelUI : MonoBehaviour
     {
         _continueButton.onClick.AddListener(() =>
         {
+            // Reload the current scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        });
+
+        _openWeaponStoreButton.onClick.AddListener(() =>
+        {
+            // Open the weapon store scroll window only if it is not open
+            if (!_weaponStoreScroll.IsOpen)
+                _weaponStoreScroll.WeaponStoreScrollToggleOpenEvent.CallToggleOpenChange(true);
         });
     }
 
