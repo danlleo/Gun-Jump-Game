@@ -1,54 +1,58 @@
+using _Scripts.StaticEvents.Enemy;
 using UnityEngine;
 
-[RequireComponent (typeof(EnemyHitEvent))]
-[SelectionBase]
-[DisallowMultipleComponent]
-public class Enemy : MonoBehaviour
+namespace _Scripts.Enemy
 {
-    [HideInInspector] public EnemyHitEvent EnemyHitEvent;
-
-    [Tooltip("Populate with the collider responsible to detect bodyshots")]
-    [SerializeField] private CapsuleCollider _enemyBodyCapsuleCollider;
-
-    [Tooltip("Populate with the collider responsible to detect headshots")]
-    [SerializeField] private SphereCollider _enemyHeadSphereCollider;
-
-    private bool _isDead;
-
-    private void Awake()
+    [RequireComponent (typeof(EnemyHitEvent))]
+    [SelectionBase]
+    [DisallowMultipleComponent]
+    public class Enemy : MonoBehaviour
     {
-        EnemyHitEvent = GetComponent<EnemyHitEvent>();
-    }
+        [HideInInspector] public EnemyHitEvent EnemyHitEvent;
 
-    private void OnEnable()
-    {
-        EnemyHitEvent.OnEnemyHit += EnemyHitEvent_OnEnemyHit;
-    }
+        [Tooltip("Populate with the collider responsible to detect bodyshots")]
+        [SerializeField] private CapsuleCollider _enemyBodyCapsuleCollider;
 
-    private void OnDisable()
-    {
-        EnemyHitEvent.OnEnemyHit -= EnemyHitEvent_OnEnemyHit;
-    }
+        [Tooltip("Populate with the collider responsible to detect headshots")]
+        [SerializeField] private SphereCollider _enemyHeadSphereCollider;
 
-    private void EnemyHitEvent_OnEnemyHit(EnemyHitEvent enemyHitEvent, EnemyHitEventArgs enemyHitEventArgs)
-    {
-        if (_isDead) 
-            return;
+        private bool _isDead;
 
-        _isDead = true;
-
-        if (enemyHitEventArgs.IsHeadshot)
+        private void Awake()
         {
-            EnemyDiedStaticEvent.CallEnemyDiedEvent(transform.position, true);
-            Economy.AddMoneyForKillingEnemy(true);
-        }
-        else
-        {
-            EnemyDiedStaticEvent.CallEnemyDiedEvent(transform.position);
-            Economy.AddMoneyForKillingEnemy(false);
+            EnemyHitEvent = GetComponent<EnemyHitEvent>();
         }
 
-        _enemyBodyCapsuleCollider.enabled = false;
-        _enemyHeadSphereCollider.enabled = false;
+        private void OnEnable()
+        {
+            EnemyHitEvent.OnEnemyHit += EnemyHitEvent_OnEnemyHit;
+        }
+
+        private void OnDisable()
+        {
+            EnemyHitEvent.OnEnemyHit -= EnemyHitEvent_OnEnemyHit;
+        }
+
+        private void EnemyHitEvent_OnEnemyHit(EnemyHitEvent enemyHitEvent, EnemyHitEventArgs enemyHitEventArgs)
+        {
+            if (_isDead) 
+                return;
+
+            _isDead = true;
+
+            if (enemyHitEventArgs.IsHeadshot)
+            {
+                EnemyDiedStaticEvent.CallEnemyDiedEvent(transform.position, true);
+                Economy.Economy.AddMoneyForKillingEnemy(true);
+            }
+            else
+            {
+                EnemyDiedStaticEvent.CallEnemyDiedEvent(transform.position);
+                Economy.Economy.AddMoneyForKillingEnemy(false);
+            }
+
+            _enemyBodyCapsuleCollider.enabled = false;
+            _enemyHeadSphereCollider.enabled = false;
+        }
     }
 }

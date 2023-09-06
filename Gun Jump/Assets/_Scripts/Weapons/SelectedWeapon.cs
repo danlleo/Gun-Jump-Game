@@ -1,37 +1,39 @@
+using _Scripts.Misc;
+using _Scripts.StaticEvents.Weapon;
 using UnityEngine;
 
-public class SelectedWeapon : Singleton<SelectedWeapon>
+namespace _Scripts.Weapons
 {
-    [SerializeField] private Weapon _selectedWeapon;
-    [SerializeField] private Transform _weaponSpawnTransform;
-
-    [SerializeField] private float _minimumHeightValueAllowed;
-
-    protected override void Awake()
+    public class SelectedWeapon : Singleton<SelectedWeapon>
     {
-        base.Awake();
-        _selectedWeapon.transform.position = _weaponSpawnTransform.position;
-    }
+        [SerializeField] private Weapon _selectedWeapon;
+        [SerializeField] private Transform _weaponSpawnTransform;
 
-    private void Update()
-    {
-        if (_selectedWeapon.transform.position.y < _minimumHeightValueAllowed)
+        [SerializeField] private float _minimumHeightValueAllowed;
+
+        protected override void Awake()
         {
-            // Call the event here, telling that we're falling
+            base.Awake();
+            _selectedWeapon.transform.position = _weaponSpawnTransform.position;
+        }
+
+        private void Update()
+        {
+            if (!(_selectedWeapon.transform.position.y < _minimumHeightValueAllowed)) return;
+            
             WeaponFallingStaticEvent.CallWeaponFallingEvent();
             Destroy(this);
         }
-    }
 
-    public Weapon GetSelectedWeapon()
-        => _selectedWeapon;
+        public Weapon GetSelectedWeapon()
+            => _selectedWeapon;
 
-    public void SetSelectedWeapon(Weapon weaponToSelect)
-    {
-        foreach (Transform weaponTransform in transform)
+        public void SetSelectedWeapon(Weapon weaponToSelect)
         {
-            if (weaponTransform.TryGetComponent(out Weapon weapon))
+            foreach (Transform weaponTransform in transform)
             {
+                if (!weaponTransform.TryGetComponent(out Weapon weapon)) continue;
+                
                 if (weapon.GetType() == weaponToSelect.GetType())
                 {
                     _selectedWeapon = weapon;
@@ -39,7 +41,7 @@ public class SelectedWeapon : Singleton<SelectedWeapon>
                     weaponTransform.gameObject.SetActive(true);
                     continue;
                 }
-
+                
                 weaponTransform.gameObject.SetActive(false);
             }
         }

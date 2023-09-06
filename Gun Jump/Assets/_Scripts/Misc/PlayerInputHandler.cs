@@ -1,37 +1,32 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public static class PlayerInputHandler
+namespace _Scripts.Misc
 {
-    private const int INTERACTABLE_UI_LAYER = 31;
-
-    public static bool IsMouseButtonDownThisFrame()
-        => Input.GetMouseButtonDown(0);
-
-    public static bool IsMouseButtonHeldThisFrame()
-        => Input.GetMouseButton(0);
-
-    public static bool IsMouseButtonUpThisFrame()
-        => Input.GetMouseButtonUp(0);
-
-    public static bool IsMouseOverInteractableUIElement()
+    public static class PlayerInputHandler
     {
-        PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = Input.mousePosition;
+        private const int INTERACTABLE_UI_LAYER = 31;
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
+        public static bool IsMouseButtonDownThisFrame()
+            => Input.GetMouseButtonDown(0);
 
-        if (results.Count > 0)
+        public static bool IsMouseButtonHeldThisFrame()
+            => Input.GetMouseButton(0);
+
+        public static bool IsMouseButtonUpThisFrame()
+            => Input.GetMouseButtonUp(0);
+
+        public static bool IsMouseOverInteractableUIElement()
         {
-            foreach (RaycastResult result in results)
-            {
-                if (result.gameObject.layer == INTERACTABLE_UI_LAYER)
-                    return true;
-            }
-        }
+            var eventData = new PointerEventData(EventSystem.current);
+            eventData.position = Input.mousePosition;
 
-        return false;
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+
+            return results.Count > 0 && results.Any(result => result.gameObject.layer == INTERACTABLE_UI_LAYER);
+        }
     }
 }

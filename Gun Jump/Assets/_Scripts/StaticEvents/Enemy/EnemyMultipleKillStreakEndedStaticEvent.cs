@@ -1,21 +1,24 @@
 using System;
 
-public static class EnemyMultipleKillStreakEndedStaticEvent
+namespace _Scripts.StaticEvents.Enemy
 {
-    public static event Action<EnemyMultipleKillStreakEndedStaticEventArgs> OnEnemyMultipleKillStreakEnded;
-
-    public static void CallEnemyMultipleKillStreakEndedStaticEvent(int totalKillCount)
+    public static class EnemyMultipleKillStreakEndedStaticEvent
     {
-        OnEnemyMultipleKillStreakEnded?.Invoke(new EnemyMultipleKillStreakEndedStaticEventArgs(totalKillCount));
+        public static event Action<EnemyMultipleKillStreakEndedStaticEventArgs> OnEnemyMultipleKillStreakEnded;
+
+        public static void CallEnemyMultipleKillStreakEndedStaticEvent(int totalKillCount)
+        {
+            OnEnemyMultipleKillStreakEnded?.Invoke(new EnemyMultipleKillStreakEndedStaticEventArgs(totalKillCount));
+        }
     }
-}
 
-public class EnemyMultipleKillStreakEndedStaticEventArgs : EventArgs
-{
-    public int TotalKillCount;
-
-    public EnemyMultipleKillStreakEndedStaticEventArgs(int totalKillCount)
+    public class EnemyMultipleKillStreakEndedStaticEventArgs : EventArgs
     {
-        TotalKillCount = totalKillCount;
+        public int TotalKillCount;
+
+        public EnemyMultipleKillStreakEndedStaticEventArgs(int totalKillCount)
+        {
+            TotalKillCount = totalKillCount;
+        }
     }
 }

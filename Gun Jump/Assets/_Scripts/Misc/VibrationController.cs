@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public static class VibrationController 
+namespace _Scripts.Misc
 {
-    public static void TriggerVibration()
+    public static class VibrationController 
     {
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        public static void TriggerVibration()
         {
-            Handheld.Vibrate();
+            if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+                Handheld.Vibrate();
         }
     }
 }

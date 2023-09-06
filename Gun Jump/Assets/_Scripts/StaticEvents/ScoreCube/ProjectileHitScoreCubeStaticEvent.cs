@@ -1,24 +1,27 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
-public static class ProjectileHitScoreCubeStaticEvent
+namespace _Scripts.StaticEvents.ScoreCube
 {
-    public static event Action<ProjectileHitScoreCubeEventArgs> OnProjectileHitScoreCube;
-
-    public static void CallProjectileHitScoreCubeEvent(int moneyMultiplierAmount, Vector3 scoreCubeWorldPosition, bool canDestroy)
-        => OnProjectileHitScoreCube?.Invoke(new ProjectileHitScoreCubeEventArgs(moneyMultiplierAmount, scoreCubeWorldPosition, canDestroy));
-}
-
-public class ProjectileHitScoreCubeEventArgs : EventArgs
-{
-    public int MoneyMultiplierAmount;
-    public Vector3 ScoreCubeWorldPosition;
-    public bool CanDestroy;
-
-    public ProjectileHitScoreCubeEventArgs(int moneyMultiplierAmount, Vector3 scoreCubeWorldPosition, bool canDestroy)
+    public static class ProjectileHitScoreCubeStaticEvent
     {
-        MoneyMultiplierAmount = moneyMultiplierAmount;
-        ScoreCubeWorldPosition = scoreCubeWorldPosition;
-        CanDestroy = canDestroy;
+        public static event Action<ProjectileHitScoreCubeEventArgs> OnProjectileHitScoreCube;
+
+        public static void CallProjectileHitScoreCubeEvent(int moneyMultiplierAmount, Vector3 scoreCubeWorldPosition, bool canDestroy)
+            => OnProjectileHitScoreCube?.Invoke(new ProjectileHitScoreCubeEventArgs(moneyMultiplierAmount, scoreCubeWorldPosition, canDestroy));
+    }
+
+    public class ProjectileHitScoreCubeEventArgs : EventArgs
+    {
+        public int MoneyMultiplierAmount;
+        public Vector3 ScoreCubeWorldPosition;
+        public bool CanDestroy;
+
+        public ProjectileHitScoreCubeEventArgs(int moneyMultiplierAmount, Vector3 scoreCubeWorldPosition, bool canDestroy)
+        {
+            MoneyMultiplierAmount = moneyMultiplierAmount;
+            ScoreCubeWorldPosition = scoreCubeWorldPosition;
+            CanDestroy = canDestroy;
+        }
     }
 }

@@ -2,58 +2,61 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
-[RequireComponent(typeof(CanvasGroup))]
-[DisallowMultipleComponent]
-public class ActionText : MonoBehaviour
+namespace _Scripts.UI.ActionText
 {
-    private TextMeshProUGUI _textMeshProGUI;
-    private CanvasGroup _canvasGroup;
-    private Vector3 _worldTextPosition;
-
-    private float _actionTextFadeOutTimeInSeconds = 1.25f;
-
-    private void Awake()
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    [RequireComponent(typeof(CanvasGroup))]
+    [DisallowMultipleComponent]
+    public class ActionText : MonoBehaviour
     {
-        _textMeshProGUI = GetComponent<TextMeshProUGUI>();
-        _canvasGroup = GetComponent<CanvasGroup>();
-    }
+        private TextMeshProUGUI _textMeshProGUI;
+        private CanvasGroup _canvasGroup;
+        private Vector3 _worldTextPosition;
 
-    private void Start()
-    {
-        StartCoroutine(ActionTextFadeOutRoutine());
-    }
+        private float _actionTextFadeOutTimeInSeconds = 1.25f;
 
-    private void Update()
-    {
-        ShowActionText();
-    }
-
-    public void Initialize(string actionText, Vector3 worldTextPosition)
-    {
-        _textMeshProGUI.text = actionText;
-        _worldTextPosition = worldTextPosition;
-    }
-
-    private void ShowActionText()
-    {
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(_worldTextPosition);
-        transform.position = screenPosition;
-    }
-
-    private IEnumerator ActionTextFadeOutRoutine()
-    {
-        float timer = _actionTextFadeOutTimeInSeconds;
-
-        while (timer >= 0)
+        private void Awake()
         {
-            timer -= Time.deltaTime / _actionTextFadeOutTimeInSeconds;
-
-            _canvasGroup.alpha = timer;
-
-            yield return null;
+            _textMeshProGUI = GetComponent<TextMeshProUGUI>();
+            _canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        Destroy(gameObject);
+        private void Start()
+        {
+            StartCoroutine(ActionTextFadeOutRoutine());
+        }
+
+        private void Update()
+        {
+            ShowActionText();
+        }
+
+        public void Initialize(string actionText, Vector3 worldTextPosition)
+        {
+            _textMeshProGUI.text = actionText;
+            _worldTextPosition = worldTextPosition;
+        }
+
+        private void ShowActionText()
+        {
+            Vector3 screenPosition = UnityEngine.Camera.main.WorldToScreenPoint(_worldTextPosition);
+            transform.position = screenPosition;
+        }
+
+        private IEnumerator ActionTextFadeOutRoutine()
+        {
+            float timer = _actionTextFadeOutTimeInSeconds;
+
+            while (timer >= 0)
+            {
+                timer -= Time.deltaTime / _actionTextFadeOutTimeInSeconds;
+
+                _canvasGroup.alpha = timer;
+
+                yield return null;
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

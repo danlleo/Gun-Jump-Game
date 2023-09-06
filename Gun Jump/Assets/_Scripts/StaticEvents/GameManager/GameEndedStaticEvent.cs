@@ -1,9 +1,12 @@
 using System;
 
-public static class GameEndedStaticEvent
+namespace _Scripts.StaticEvents.GameManager
 {
-    public static event Action OnGameEnded;
+    public static class GameEndedStaticEvent
+    {
+        public static event Action OnGameEnded;
 
-    public static void CallGameEndedEvent()
-        => OnGameEnded?.Invoke();
+        public static void CallGameEndedEvent()
+            => OnGameEnded?.Invoke();
+    }
 }

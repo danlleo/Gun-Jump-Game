@@ -1,6 +1,9 @@
-public interface IHittable
+namespace _Scripts.Interfaces
 {
-    public void OnHit();
+    public interface IHittable
+    {
+        public void OnHit();
 
-    public void OnHit(Projectile projectile);
+        public void OnHit(Projectile.Projectile projectile);
+    }
 }

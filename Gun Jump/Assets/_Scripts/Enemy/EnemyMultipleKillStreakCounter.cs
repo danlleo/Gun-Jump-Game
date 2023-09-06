@@ -1,54 +1,58 @@
 using System.Collections;
+using _Scripts.StaticEvents.Enemy;
 using UnityEngine;
 
-public class EnemyMultipleKillStreakCounter : MonoBehaviour
+namespace _Scripts.Enemy
 {
-    private const float TIME_BEFORE_STREAK_ENDS_IN_SECONDS = .5f;
-
-    private int _enemyKillStreakCount;
-
-    private Coroutine _killStreakCountdownInSecondsCoroutine;
-
-    private void OnEnable()
+    public class EnemyMultipleKillStreakCounter : MonoBehaviour
     {
-        EnemyDiedStaticEvent.OnEnemyDied += EnemyDiedStaticEvent_OnEnemyDied;
-    }
+        private const float TIME_BEFORE_STREAK_ENDS_IN_SECONDS = .5f;
 
-    private void OnDisable()
-    {
-        EnemyDiedStaticEvent.OnEnemyDied -= EnemyDiedStaticEvent_OnEnemyDied;
-    }
+        private int _enemyKillStreakCount;
 
-    private void EnemyDiedStaticEvent_OnEnemyDied(EnemyDiedStaticEventArgs enemyDiedStaticEventArgs)
-    {
-        if (_killStreakCountdownInSecondsCoroutine != null)
-            StopCoroutine(KillStreakCountdownInSecondsRoutine());
+        private Coroutine _killStreakCountdownInSecondsCoroutine;
 
-        StartCoroutine(KillStreakCountdownInSecondsRoutine());
-    }
-
-    private IEnumerator KillStreakCountdownInSecondsRoutine()
-    {
-        IncreaseKillStreakCount();
-
-        float killStreakCountdownTimer = TIME_BEFORE_STREAK_ENDS_IN_SECONDS;
-
-        while (killStreakCountdownTimer > 0)
+        private void OnEnable()
         {
-            killStreakCountdownTimer -= Time.deltaTime;
-            yield return null;
+            EnemyDiedStaticEvent.OnEnemyDied += EnemyDiedStaticEvent_OnEnemyDied;
         }
 
-        EndKillStreak();
-    }
+        private void OnDisable()
+        {
+            EnemyDiedStaticEvent.OnEnemyDied -= EnemyDiedStaticEvent_OnEnemyDied;
+        }
 
-    private void EndKillStreak()
-    {
-        EnemyMultipleKillStreakEndedStaticEvent.CallEnemyMultipleKillStreakEndedStaticEvent(_enemyKillStreakCount);
-        _killStreakCountdownInSecondsCoroutine = null;
-        _enemyKillStreakCount = 0;
-    }
+        private void EnemyDiedStaticEvent_OnEnemyDied(EnemyDiedStaticEventArgs enemyDiedStaticEventArgs)
+        {
+            if (_killStreakCountdownInSecondsCoroutine != null)
+                StopCoroutine(KillStreakCountdownInSecondsRoutine());
 
-    private void IncreaseKillStreakCount()
-        => _enemyKillStreakCount++;
+            StartCoroutine(KillStreakCountdownInSecondsRoutine());
+        }
+
+        private IEnumerator KillStreakCountdownInSecondsRoutine()
+        {
+            IncreaseKillStreakCount();
+
+            float killStreakCountdownTimer = TIME_BEFORE_STREAK_ENDS_IN_SECONDS;
+
+            while (killStreakCountdownTimer > 0)
+            {
+                killStreakCountdownTimer -= Time.deltaTime;
+                yield return null;
+            }
+
+            EndKillStreak();
+        }
+
+        private void EndKillStreak()
+        {
+            EnemyMultipleKillStreakEndedStaticEvent.CallEnemyMultipleKillStreakEndedStaticEvent(_enemyKillStreakCount);
+            _killStreakCountdownInSecondsCoroutine = null;
+            _enemyKillStreakCount = 0;
+        }
+
+        private void IncreaseKillStreakCount()
+            => _enemyKillStreakCount++;
+    }
 }

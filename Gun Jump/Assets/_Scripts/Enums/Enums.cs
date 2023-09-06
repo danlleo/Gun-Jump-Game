@@ -1,7 +1,10 @@
-public enum GameState
+namespace _Scripts.Enums
 {
-    GameStarted,
-    PlayingLevel,
-    FallingDown,
-    GameEnded,
+    public enum GameState
+    {
+        GAME_STARTED,
+        PLAYING_LEVEL,
+        FALLING_DOWN,
+        GAME_ENDED,
+    }
 }

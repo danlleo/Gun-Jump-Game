@@ -1,9 +1,12 @@
 using System;
 
-public static class CoinPickUpStaticEvent
+namespace _Scripts.StaticEvents.Coin
 {
-    public static event Action OnCoinPickUp;
+    public static class CoinPickUpStaticEvent
+    {
+        public static event Action OnCoinPickUp;
 
-    public static void CallCoinPickUpEvent()
-        => OnCoinPickUp?.Invoke();
+        public static void CallCoinPickUpEvent()
+            => OnCoinPickUp?.Invoke();
+    }
 }

@@ -1,9 +1,12 @@
 using System;
 
-public static class WeaponFallingStaticEvent
+namespace _Scripts.StaticEvents.Weapon
 {
-    public static event Action OnWeaponFalling;
+    public static class WeaponFallingStaticEvent
+    {
+        public static event Action OnWeaponFalling;
 
-    public static void CallWeaponFallingEvent()
-        => OnWeaponFalling?.Invoke();
+        public static void CallWeaponFallingEvent()
+            => OnWeaponFalling?.Invoke();
+    }
 }

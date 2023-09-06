@@ -1,29 +1,32 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AudioClipRefs", menuName = "Scriptable Objects/Audio/AudioClipRefs")]
-public class AudioClipRefsSO : ScriptableObject
+namespace _Scripts.Audio
 {
-    #region ENEMY AUDIO
+    [CreateAssetMenu(fileName = "AudioClipRefs", menuName = "Scriptable Objects/Audio/AudioClipRefs")]
+    public class AudioClipRefsSO : ScriptableObject
+    {
+        #region ENEMY AUDIO
 
-    [Space(10)]
-    [Header("Enemy Audio")]
-    [Space(5)]
+        [Space(10)]
+        [Header("Enemy Audio")]
+        [Space(5)]
 
-    public AudioClip DoubleKill;
-    public AudioClip TripleKill;
-    public AudioClip Headshot;
-    public AudioClip[] EnemyDeathSounds;
+        public AudioClip DoubleKill;
+        public AudioClip TripleKill;
+        public AudioClip Headshot;
+        public AudioClip[] EnemyDeathSounds;
 
-    #endregion
+        #endregion
 
-    #region ENVIRONMENT AUDIO
+        #region ENVIRONMENT AUDIO
 
-    [Space(10)]
-    [Header("Environment Audio")]
-    [Space(5)]
+        [Space(10)]
+        [Header("Environment Audio")]
+        [Space(5)]
 
-    public AudioClip CoinPickUp;
-    public AudioClip HitScoreCube;
+        public AudioClip CoinPickUp;
+        public AudioClip HitScoreCube;
 
-    #endregion
+        #endregion
+    }
 }

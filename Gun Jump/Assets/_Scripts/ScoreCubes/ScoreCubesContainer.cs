@@ -1,37 +1,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreCubesContainer : MonoBehaviour
+namespace _Scripts.ScoreCubes
 {
-    [SerializeField] private List<ScoreCube> _scoreCubeList;
-
-    private void Awake()
+    public class ScoreCubesContainer : MonoBehaviour
     {
-        PlaceCubesInRandomOrder();
-    }
+        [SerializeField] private List<ScoreCube> _scoreCubeList;
 
-    private void PlaceCubesInRandomOrder()
-    {
-        Vector3 cubeTopPosition = Vector3.zero;
-        int spawnedCubesCount = 0;
-
-        while (_scoreCubeList.Count > 0)
+        private void Awake()
         {
-            int randomCubeIndex = Random.Range(0, _scoreCubeList.Count - 1);
+            PlaceCubesInRandomOrder();
+        }
 
-            if (spawnedCubesCount == 0)
+        private void PlaceCubesInRandomOrder()
+        {
+            Vector3 cubeTopPosition = Vector3.zero;
+            int spawnedCubesCount = 0;
+
+            while (_scoreCubeList.Count > 0)
             {
-                ScoreCube firstScoreCube = Instantiate(_scoreCubeList[randomCubeIndex], transform.position, Quaternion.identity, transform);
-                cubeTopPosition = firstScoreCube.GetCubeTopPosition();
+                int randomCubeIndex = Random.Range(0, _scoreCubeList.Count - 1);
+
+                if (spawnedCubesCount == 0)
+                {
+                    ScoreCube firstScoreCube = Instantiate(_scoreCubeList[randomCubeIndex], transform.position, Quaternion.identity, transform);
+                    cubeTopPosition = firstScoreCube.GetCubeTopPosition();
+                    _scoreCubeList.RemoveAt(randomCubeIndex);
+                    spawnedCubesCount++;
+                    continue;
+                }
+
+                ScoreCube scoreCube = Instantiate(_scoreCubeList[randomCubeIndex], cubeTopPosition, Quaternion.identity, transform);
+                cubeTopPosition = scoreCube.GetCubeTopPosition();
                 _scoreCubeList.RemoveAt(randomCubeIndex);
                 spawnedCubesCount++;
-                continue;
             }
-
-            ScoreCube scoreCube = Instantiate(_scoreCubeList[randomCubeIndex], cubeTopPosition, Quaternion.identity, transform);
-            cubeTopPosition = scoreCube.GetCubeTopPosition();
-            _scoreCubeList.RemoveAt(randomCubeIndex);
-            spawnedCubesCount++;
         }
     }
 }

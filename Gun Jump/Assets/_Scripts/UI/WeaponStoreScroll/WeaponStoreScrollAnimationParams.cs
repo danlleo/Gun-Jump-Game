@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class WeaponStoreScrollAnimationParams
+namespace _Scripts.UI.WeaponStoreScroll
 {
-    public static readonly int OnOpen = Animator.StringToHash("OnOpen");
-    public static readonly int OnClose = Animator.StringToHash("OnClose");
+    public class WeaponStoreScrollAnimationParams
+    {
+        public static readonly int OnOpen = Animator.StringToHash("OnOpen");
+        public static readonly int OnClose = Animator.StringToHash("OnClose");
+    }
 }

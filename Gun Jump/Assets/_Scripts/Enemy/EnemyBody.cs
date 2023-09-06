@@ -1,22 +1,27 @@
+using _Scripts.Interfaces;
+using _Scripts.Projectile;
 using UnityEngine;
 
-[DisallowMultipleComponent]
-public class EnemyBody : MonoBehaviour, IHittable
+namespace _Scripts.Enemy
 {
-    [SerializeField] private Enemy _enemy;
-
-    public void OnHit()
+    [DisallowMultipleComponent]
+    public class EnemyBody : MonoBehaviour, IHittable
     {
-        _enemy.EnemyHitEvent.CallEnemyHitEvent(false);
-    }
+        [SerializeField] private Enemy _enemy;
 
-    public void OnHit(Projectile projectile)
-    {
-        _enemy.EnemyHitEvent.CallEnemyHitEvent(false);
+        public void OnHit()
+        {
+            _enemy.EnemyHitEvent.CallEnemyHitEvent(false);
+        }
 
-        if (projectile.CanGoThroughBodies)
-            return;
+        public void OnHit(Projectile.Projectile projectile)
+        {
+            _enemy.EnemyHitEvent.CallEnemyHitEvent(false);
 
-        ProjectilePool.Instance.ReturnToPool(projectile);
+            if (projectile.CanGoThroughBodies)
+                return;
+
+            ProjectilePool.Instance.ReturnToPool(projectile);
+        }
     }
 }

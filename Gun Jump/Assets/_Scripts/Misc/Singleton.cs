@@ -1,19 +1,22 @@
 using UnityEngine;
 
-[DisallowMultipleComponent]
-public class Singleton<T> : MonoBehaviour where T : Singleton<T>
+namespace _Scripts.Misc
 {
-    public static T Instance { get; private set; }
-
-    protected virtual void Awake()
+    [DisallowMultipleComponent]
+    public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        if (Instance != null)
-        {
-            Debug.LogWarning($"There is more than one singleton: {Instance.name}");
-            Destroy(gameObject);
-            return;
-        }
+        public static T Instance { get; private set; }
 
-        Instance = this as T;
+        protected virtual void Awake()
+        {
+            if (Instance != null)
+            {
+                Debug.LogWarning($"There is more than one singleton: {Instance.name}");
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this as T;
+        }
     }
 }

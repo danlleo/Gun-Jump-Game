@@ -1,21 +1,24 @@
 using System;
 using UnityEngine;
 
-[DisallowMultipleComponent]
-public class WeaponStoreScrollToggleOpenEvent : MonoBehaviour
+namespace _Scripts.UI.WeaponStoreScroll
 {
-    public event Action<WeaponStoreScrollToggleOpenEventArgs> OnToggleOpenChange;
-
-    public void CallToggleOpenChange(bool isOpen)
-        => OnToggleOpenChange?.Invoke(new WeaponStoreScrollToggleOpenEventArgs(isOpen));
-}
-
-public class WeaponStoreScrollToggleOpenEventArgs : EventArgs
-{
-    public bool IsOpen;
-
-    public WeaponStoreScrollToggleOpenEventArgs(bool isOpen)
+    [DisallowMultipleComponent]
+    public class WeaponStoreScrollToggleOpenEvent : MonoBehaviour
     {
-        IsOpen = isOpen;
+        public event Action<WeaponStoreScrollToggleOpenEventArgs> OnToggleOpenChange;
+
+        public void CallToggleOpenChange(bool isOpen)
+            => OnToggleOpenChange?.Invoke(new WeaponStoreScrollToggleOpenEventArgs(isOpen));
+    }
+
+    public class WeaponStoreScrollToggleOpenEventArgs : EventArgs
+    {
+        public bool IsOpen;
+
+        public WeaponStoreScrollToggleOpenEventArgs(bool isOpen)
+        {
+            IsOpen = isOpen;
+        }
     }
 }

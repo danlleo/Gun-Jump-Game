@@ -1,29 +1,35 @@
+using _Scripts.Audio;
+using _Scripts.Enums;
+using _Scripts.Misc;
+using _Scripts.Projectile;
+using _Scripts.Utilities.GameManager;
 using UnityEngine;
 
-public class Shotgun : Weapon
+namespace _Scripts.Weapons
 {
-    [SerializeField] private AudioClip _shotClip;
-    [SerializeField] private WeaponDetailsSO _shotgunDetails;
-    [SerializeField] private ParticleSystem _muzzleFlashEffect;
-    [SerializeField] private Transform _projectileSpawnPoint;
-
-    private Rigidbody _rb;
-
-    private int _maxBulletSpawnCount = 2;
-    private float _normalizedProjectileSpreadAngle = .1f;
-
-    private void Awake()
-        => _rb = GetComponent<Rigidbody>();
-
-    private void Update()
+    public class Shotgun : Weapon
     {
-        if (GameManager.Instance.CurrentGameState != GameState.PlayingLevel)
-            return;
+        [SerializeField] private AudioClip _shotClip;
+        [SerializeField] private WeaponDetailsSO _shotgunDetails;
+        [SerializeField] private ParticleSystem _muzzleFlashEffect;
+        [SerializeField] private Transform _projectileSpawnPoint;
 
-        ClampAngularVelocity();
+        private Rigidbody _rb;
 
-        if (PlayerInputHandler.IsMouseButtonDownThisFrame())
+        private int _maxBulletSpawnCount = 2;
+        private float _normalizedProjectileSpreadAngle = .1f;
+
+        private void Awake()
+            => _rb = GetComponent<Rigidbody>();
+
+        private void Update()
         {
+            if (GameManager.Instance.CurrentGameState != GameState.PLAYING_LEVEL)
+                return;
+
+            ClampAngularVelocity();
+
+            if (!PlayerInputHandler.IsMouseButtonDownThisFrame()) return;
             if (PlayerInputHandler.IsMouseOverInteractableUIElement())
                 return;
 
@@ -31,31 +37,31 @@ public class Shotgun : Weapon
             ApplyTorque();
             BounceBack();
         }
-    }
 
-    protected override Rigidbody RB => _rb;
+        protected override Rigidbody RB => _rb;
 
-    protected override WeaponDetailsSO WeaponDetails => _shotgunDetails;
+        protected override WeaponDetailsSO WeaponDetails => _shotgunDetails;
 
-    protected override Transform WeaponProjectileSpawnPoint => _projectileSpawnPoint;
+        protected override Transform WeaponProjectileSpawnPoint => _projectileSpawnPoint;
 
-    protected override void Fire()
-    {
-        base.Fire();
-
-        _muzzleFlashEffect.Play();
-        AudioController.Instance.PlaySound(_shotClip, .655f);
-
-        // Spawn specific bullet amount
-        for (int i = 0; i < _maxBulletSpawnCount; i++)
+        protected override void Fire()
         {
-            Projectile projectile = ProjectilePool.Instance.GetPooledObject();
-            projectile.Initialize(
-                transform.forward + transform.up * (i % 2 == 0 ? _normalizedProjectileSpreadAngle : -_normalizedProjectileSpreadAngle),
-                _projectileSpawnPoint.position,
-                _shotgunDetails.ProjectilesCanRicochet,
-                _shotgunDetails.ProjectilesCanGoTroughBodies
-            );
+            base.Fire();
+
+            _muzzleFlashEffect.Play();
+            AudioController.Instance.PlaySound(_shotClip, .655f);
+
+            // Spawn specific bullet amount
+            for (int i = 0; i < _maxBulletSpawnCount; i++)
+            {
+                var projectile = ProjectilePool.Instance.GetPooledObject();
+                projectile.Initialize(
+                    transform.forward + transform.up * (i % 2 == 0 ? _normalizedProjectileSpreadAngle : -_normalizedProjectileSpreadAngle),
+                    _projectileSpawnPoint.position,
+                    _shotgunDetails.ProjectilesCanRicochet,
+                    _shotgunDetails.ProjectilesCanGoTroughBodies
+                );
+            }
         }
     }
 }

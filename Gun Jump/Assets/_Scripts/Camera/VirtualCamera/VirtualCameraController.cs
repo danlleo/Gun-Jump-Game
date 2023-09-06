@@ -1,39 +1,44 @@
+using _Scripts.StaticEvents.Weapon;
+using _Scripts.Weapons;
 using Cinemachine;
 using UnityEngine;
 
-[DisallowMultipleComponent]
-public class VirtualCameraController : MonoBehaviour
+namespace _Scripts.Camera.VirtualCamera
 {
-    private CinemachineVirtualCamera _virtualCamera;
-
-    private void Awake()
+    [DisallowMultipleComponent]
+    public class VirtualCameraController : MonoBehaviour
     {
-        _virtualCamera = GetComponent<CinemachineVirtualCamera>();
-    }
+        private CinemachineVirtualCamera _virtualCamera;
 
-    private void OnEnable()
-    {
-        WeaponFiredStaticEvent.OnWeaponFired += WeaponFiredStaticEvent_OnWeaponFired;
-        WeaponFallingStaticEvent.OnWeaponFalling += WeaponFallingStaticEvent_OnWeaponFalling;
-    }
+        private void Awake()
+        {
+            _virtualCamera = GetComponent<CinemachineVirtualCamera>();
+        }
 
-    private void OnDisable()
-    {
-        WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
-        WeaponFallingStaticEvent.OnWeaponFalling -= WeaponFallingStaticEvent_OnWeaponFalling;
-    }
+        private void OnEnable()
+        {
+            WeaponFiredStaticEvent.OnWeaponFired += WeaponFiredStaticEvent_OnWeaponFired;
+            WeaponFallingStaticEvent.OnWeaponFalling += WeaponFallingStaticEvent_OnWeaponFalling;
+        }
 
-    private void WeaponFallingStaticEvent_OnWeaponFalling()
-    {
-        _virtualCamera.Follow = null;
-        _virtualCamera.LookAt = null;
-    }
+        private void OnDisable()
+        {
+            WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
+            WeaponFallingStaticEvent.OnWeaponFalling -= WeaponFallingStaticEvent_OnWeaponFalling;
+        }
 
-    private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs _)
-    {
-        _virtualCamera.Follow = SelectedWeapon.Instance.GetSelectedWeapon().transform;
-        _virtualCamera.LookAt = SelectedWeapon.Instance.GetSelectedWeapon().transform;
+        private void WeaponFallingStaticEvent_OnWeaponFalling()
+        {
+            _virtualCamera.Follow = null;
+            _virtualCamera.LookAt = null;
+        }
 
-        WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
+        private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs _)
+        {
+            _virtualCamera.Follow = SelectedWeapon.Instance.GetSelectedWeapon().transform;
+            _virtualCamera.LookAt = SelectedWeapon.Instance.GetSelectedWeapon().transform;
+
+            WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
+        }
     }
 }

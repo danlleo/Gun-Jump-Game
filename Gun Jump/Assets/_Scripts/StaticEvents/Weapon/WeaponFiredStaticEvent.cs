@@ -1,20 +1,23 @@
 using System;
 using UnityEngine;
 
-public static class WeaponFiredStaticEvent
+namespace _Scripts.StaticEvents.Weapon
 {
-    public static event Action<WeaponFiredEventArgs> OnWeaponFired;
-
-    public static void CallWeaponFiredEvent(Transform firedWeaponShootTransform)
-        => OnWeaponFired?.Invoke(new WeaponFiredEventArgs(firedWeaponShootTransform));
-}
-
-public class WeaponFiredEventArgs : EventArgs
-{
-    public Transform FiredWeaponShootTransform;
-
-    public WeaponFiredEventArgs(Transform firedWeaponShootTransform)
+    public static class WeaponFiredStaticEvent
     {
-        FiredWeaponShootTransform = firedWeaponShootTransform;
+        public static event Action<WeaponFiredEventArgs> OnWeaponFired;
+
+        public static void CallWeaponFiredEvent(Transform firedWeaponShootTransform)
+            => OnWeaponFired?.Invoke(new WeaponFiredEventArgs(firedWeaponShootTransform));
+    }
+
+    public class WeaponFiredEventArgs : EventArgs
+    {
+        public Transform FiredWeaponShootTransform;
+
+        public WeaponFiredEventArgs(Transform firedWeaponShootTransform)
+        {
+            FiredWeaponShootTransform = firedWeaponShootTransform;
+        }
     }
 }

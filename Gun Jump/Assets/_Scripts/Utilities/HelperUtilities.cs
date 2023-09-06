@@ -1,23 +1,26 @@
 using UnityEngine;
 
-public static class HelperUtilities
+namespace _Scripts.Utilities
 {
-    private static Camera s_camera;
-
-    public static bool IsObjectWithingScreenBoundaries(Vector3 objectWorldSpace)
+    public static class HelperUtilities
     {
-        if (s_camera == null)
-            s_camera = Camera.main;
+        private static UnityEngine.Camera s_camera;
 
-        Vector3 objectScreenPosition = s_camera.WorldToScreenPoint(objectWorldSpace);
+        public static bool IsObjectWithingScreenBoundaries(Vector3 objectWorldSpace)
+        {
+            if (s_camera == null)
+                s_camera = UnityEngine.Camera.main;
 
-        float screenWidth = Screen.width;
-        float screenHeight = Screen.height;
+            Vector3 objectScreenPosition = s_camera.WorldToScreenPoint(objectWorldSpace);
 
-        bool isObjectWithinScreen =
-            objectScreenPosition.x >= 0 && objectScreenPosition.x <= screenWidth &&
-            objectScreenPosition.y >= 0 && objectScreenPosition.y <= screenHeight;
+            float screenWidth = Screen.width;
+            float screenHeight = Screen.height;
 
-        return isObjectWithinScreen;
+            bool isObjectWithinScreen =
+                objectScreenPosition.x >= 0 && objectScreenPosition.x <= screenWidth &&
+                objectScreenPosition.y >= 0 && objectScreenPosition.y <= screenHeight;
+
+            return isObjectWithinScreen;
+        }
     }
 }

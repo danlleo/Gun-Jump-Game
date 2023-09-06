@@ -1,49 +1,57 @@
+using _Scripts.Audio;
+using _Scripts.Enums;
+using _Scripts.Misc;
+using _Scripts.Projectile;
+using _Scripts.Utilities.GameManager;
 using UnityEngine;
 
-public class Pistol : Weapon
+namespace _Scripts.Weapons
 {
-    [SerializeField] private AudioClip _shotClip;
-    [SerializeField] private WeaponDetailsSO _pistolDetails;
-    [SerializeField] private Transform _projectileSpawnPoint;
-    [SerializeField] private ParticleSystem _muzzleFlashEffect;
-
-    private Rigidbody _rb;
-
-    private void Awake()
-        => _rb = GetComponent<Rigidbody>();
-
-    private void Update()
+    public class Pistol : Weapon
     {
-        if (GameManager.Instance.CurrentGameState != GameState.PlayingLevel)
-            return;
+        [SerializeField] private AudioClip _shotClip;
+        [SerializeField] private WeaponDetailsSO _pistolDetails;
+        [SerializeField] private Transform _projectileSpawnPoint;
+        [SerializeField] private ParticleSystem _muzzleFlashEffect;
 
-        ClampAngularVelocity();
+        private Rigidbody _rb;
 
-        if (PlayerInputHandler.IsMouseButtonDownThisFrame())
+        private void Awake()
+            => _rb = GetComponent<Rigidbody>();
+
+        private void Update()
         {
-            if (PlayerInputHandler.IsMouseOverInteractableUIElement())
+            if (GameManager.Instance.CurrentGameState != GameState.PLAYING_LEVEL)
                 return;
 
-            Fire();
-            ApplyTorque();
-            BounceBack();
+            ClampAngularVelocity();
+
+            if (PlayerInputHandler.IsMouseButtonDownThisFrame())
+            {
+                if (PlayerInputHandler.IsMouseOverInteractableUIElement())
+                    return;
+
+                Fire();
+                ApplyTorque();
+                BounceBack();
+            }
         }
-    }
 
-    protected override Rigidbody RB => _rb;
+        protected override Rigidbody RB => _rb;
 
-    protected override WeaponDetailsSO WeaponDetails => _pistolDetails;
+        protected override WeaponDetailsSO WeaponDetails => _pistolDetails;
 
-    protected override Transform WeaponProjectileSpawnPoint => _projectileSpawnPoint;
+        protected override Transform WeaponProjectileSpawnPoint => _projectileSpawnPoint;
 
-    protected override void Fire()
-    {
-        base.Fire();
+        protected override void Fire()
+        {
+            base.Fire();
 
-        _muzzleFlashEffect.Play();
-        AudioController.Instance.PlaySound(_shotClip, .655f);
+            _muzzleFlashEffect.Play();
+            AudioController.Instance.PlaySound(_shotClip, .655f);
 
-        Projectile projectile = ProjectilePool.Instance.GetPooledObject();
-        projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _pistolDetails.ProjectilesCanRicochet, _pistolDetails.ProjectilesCanGoTroughBodies);
+            var projectile = ProjectilePool.Instance.GetPooledObject();
+            projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _pistolDetails.ProjectilesCanRicochet, _pistolDetails.ProjectilesCanGoTroughBodies);
+        }
     }
 }

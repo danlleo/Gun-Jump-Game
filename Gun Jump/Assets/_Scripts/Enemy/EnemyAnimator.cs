@@ -1,31 +1,34 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Enemy))]
-[DisallowMultipleComponent]
-public class EnemyAnimator : MonoBehaviour
+namespace _Scripts.Enemy
 {
-    private Animator _animator;
-    private Enemy _enemy;
-
-    private void Awake()
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(Enemy))]
+    [DisallowMultipleComponent]
+    public class EnemyAnimator : MonoBehaviour
     {
-        _animator = GetComponent<Animator>();
-        _enemy = GetComponent<Enemy>();
-    }
+        private Animator _animator;
+        private Enemy _enemy;
 
-    private void OnEnable()
-    {
-        _enemy.EnemyHitEvent.OnEnemyHit += EnemyHitEvent_OnEnemyHit;
-    }
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+            _enemy = GetComponent<Enemy>();
+        }
 
-    private void OnDisable()
-    {
-        _enemy.EnemyHitEvent.OnEnemyHit -= EnemyHitEvent_OnEnemyHit;
-    }
+        private void OnEnable()
+        {
+            _enemy.EnemyHitEvent.OnEnemyHit += EnemyHitEvent_OnEnemyHit;
+        }
 
-    private void EnemyHitEvent_OnEnemyHit(EnemyHitEvent enemyHitEvent, EnemyHitEventArgs enemyHitEventArgs)
-    {
-        _animator.SetTrigger(EnemyAnimationParams.OnEnemyHit);
+        private void OnDisable()
+        {
+            _enemy.EnemyHitEvent.OnEnemyHit -= EnemyHitEvent_OnEnemyHit;
+        }
+
+        private void EnemyHitEvent_OnEnemyHit(EnemyHitEvent enemyHitEvent, EnemyHitEventArgs enemyHitEventArgs)
+        {
+            _animator.SetTrigger(EnemyAnimationParams.OnEnemyHit);
+        }
     }
 }
