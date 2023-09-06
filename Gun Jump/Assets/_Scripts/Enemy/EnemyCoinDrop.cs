@@ -25,7 +25,7 @@ public class EnemyCoinDrop : MonoBehaviour
 
     private void EnemyHitEvent_OnEnemyHit(EnemyHitEvent enemyHitEvent, EnemyHitEventArgs enemyHitEventArgs)
     {
-        SpawnCoins(enemyHitEvent.gameObject.transform.position, SelectedWeapon.Instance.GetSelectedWeaponTransform());
+        SpawnCoins(enemyHitEvent.gameObject.transform.position, SelectedWeapon.Instance.GetSelectedWeapon().transform);
     }
 
     private void SpawnCoins(Vector3 spawnPosition, Transform objectToFollow)

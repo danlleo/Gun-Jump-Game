@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[SelectionBase]
 [RequireComponent(typeof(Rigidbody))]
 [DisallowMultipleComponent]
 public abstract class Weapon : MonoBehaviour

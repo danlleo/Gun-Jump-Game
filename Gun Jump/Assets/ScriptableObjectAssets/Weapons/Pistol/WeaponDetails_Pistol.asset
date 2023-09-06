@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: WeaponDetails_Pistol
   m_EditorClassIdentifier: 
   _maxAngularVelocity: 10
-  _torque: 140
+  _torque: 170
   _maxTorqueBonus: 150
   _maxJumpHeight: 5.5
   _jumpForce: 2.25
-  _sideForce: 2
+  _sideForce: 3
   _bounceBackForce: 40
   _projectilesCanRicochet: 0
   _projectilesCanGoTroughBodies: 0

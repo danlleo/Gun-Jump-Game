@@ -16,8 +16,8 @@ MonoBehaviour:
   _torque: 140
   _maxTorqueBonus: 150
   _maxJumpHeight: 5.5
-  _jumpForce: 2.25
+  _jumpForce: 2
   _sideForce: 2
-  _bounceBackForce: 40
+  _bounceBackForce: 45
   _projectilesCanRicochet: 1
   _projectilesCanGoTroughBodies: 0

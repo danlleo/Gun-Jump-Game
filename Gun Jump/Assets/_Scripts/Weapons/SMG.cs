@@ -15,7 +15,7 @@ public class SMG : Weapon
 
     private void Update()
     {
-        if (GameManager.Instance.CurrentGameState == GameState.GameEnded)
+        if (GameManager.Instance.CurrentGameState != GameState.PlayingLevel)
             return;
 
         _fireRateTimer += Time.deltaTime;
@@ -25,11 +25,17 @@ public class SMG : Weapon
 
         if (PlayerInputHandler.IsMouseButtonDownThisFrame())
         {
+            if (PlayerInputHandler.IsMouseOverInteractableUIElement())
+                return;
+
             ApplyTorque();
             BounceBack();
         }
         else if (PlayerInputHandler.IsMouseButtonHeldThisFrame())
         {
+            if (PlayerInputHandler.IsMouseOverInteractableUIElement())
+                return;
+
             Fire();
         }
     }

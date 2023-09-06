@@ -14,13 +14,16 @@ public class Pistol : Weapon
 
     private void Update()
     {
-        if (GameManager.Instance.CurrentGameState == GameState.GameEnded)
+        if (GameManager.Instance.CurrentGameState != GameState.PlayingLevel)
             return;
 
         ClampAngularVelocity();
 
         if (PlayerInputHandler.IsMouseButtonDownThisFrame())
         {
+            if (PlayerInputHandler.IsMouseOverInteractableUIElement())
+                return;
+
             Fire();
             ApplyTorque();
             BounceBack();
@@ -38,7 +41,7 @@ public class Pistol : Weapon
         base.Fire();
 
         _muzzleFlashEffect.Play();
-        AudioController.Instance.PlaySound(_shotClip);
+        AudioController.Instance.PlaySound(_shotClip, .655f);
 
         Projectile projectile = ProjectilePool.Instance.GetPooledObject();
         projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _pistolDetails.ProjectilesCanRicochet, _pistolDetails.ProjectilesCanGoTroughBodies);

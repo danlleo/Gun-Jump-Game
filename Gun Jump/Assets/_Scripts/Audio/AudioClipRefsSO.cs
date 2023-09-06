@@ -12,6 +12,7 @@ public class AudioClipRefsSO : ScriptableObject
     public AudioClip DoubleKill;
     public AudioClip TripleKill;
     public AudioClip Headshot;
+    public AudioClip[] EnemyDeathSounds;
 
     #endregion
 
@@ -22,6 +23,7 @@ public class AudioClipRefsSO : ScriptableObject
     [Space(5)]
 
     public AudioClip CoinPickUp;
+    public AudioClip HitScoreCube;
 
     #endregion
 }

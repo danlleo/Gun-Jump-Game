@@ -17,13 +17,16 @@ public class Shotgun : Weapon
 
     private void Update()
     {
-        if (GameManager.Instance.CurrentGameState == GameState.GameEnded)
+        if (GameManager.Instance.CurrentGameState != GameState.PlayingLevel)
             return;
 
         ClampAngularVelocity();
 
         if (PlayerInputHandler.IsMouseButtonDownThisFrame())
         {
+            if (PlayerInputHandler.IsMouseOverInteractableUIElement())
+                return;
+
             Fire();
             ApplyTorque();
             BounceBack();
@@ -41,7 +44,7 @@ public class Shotgun : Weapon
         base.Fire();
 
         _muzzleFlashEffect.Play();
-        AudioController.Instance.PlaySound(_shotClip);
+        AudioController.Instance.PlaySound(_shotClip, .655f);
 
         // Spawn specific bullet amount
         for (int i = 0; i < _maxBulletSpawnCount; i++)

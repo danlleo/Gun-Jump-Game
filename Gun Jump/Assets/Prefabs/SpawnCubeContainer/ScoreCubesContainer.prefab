@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &931341022285430976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2591355478271096280}
+  - component: {fileID: 5053187964212402602}
+  m_Layer: 0
+  m_Name: ScoreCubesContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2591355478271096280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931341022285430976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 12.783}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5053187964212402602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931341022285430976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4fd03ca86fd494aafdc2e5e660c6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreCubeList:
+  - {fileID: 3241542956923442917, guid: dd7c63f6c857bbc428179e384d3ae5d4, type: 3}
+  - {fileID: 3241542956923442917, guid: 2b86de33f44ea3842b0180e9fb548910, type: 3}
+  - {fileID: 3241542956923442917, guid: 55763fe49802e1c4bbe2fc74e76d3b1a, type: 3}
+  - {fileID: 3560417921184702888, guid: 83ff82cca9211f24e9d1f966c34396af, type: 3}
+  - {fileID: 3560417921184702888, guid: f484ed471d7ea23418272d57a147fe87, type: 3}
+  - {fileID: 3241542956923442917, guid: 92e301672f3bbe645a60efc041e03186, type: 3}
+  - {fileID: 3241542956923442917, guid: 3d46618e1170a6e4f96fd414f95c4bf1, type: 3}
+  - {fileID: 3241542956923442917, guid: 0a46bbaa382533b4fa46d1012a9eadd4, type: 3}

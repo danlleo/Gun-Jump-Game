@@ -24,13 +24,17 @@ public class WeaponScrollSelectItem : MonoBehaviour, IPointerClickHandler
     {
         if (!IsWeaponPurchased())
         {
-            if (Economy.TryPurchaseWeapon(_weaponSO.PriceToUnlock))
+            if (Economy.TryPurchaseWeapon(_weaponSO.PriceToUnlock) && IsAvailableForPurchaseOrSelect())
             {
                 GameManager.Instance.SaveGameData.PurchasedWeaponPrefabIDList.Add(_weaponSO.WeaponID);
                 EconomyMadePurchaseStaticEvent.CallMadePurchaseEvent();
                 ApplyStylesAccordingToAvailableState(IsAvailableForPurchaseOrSelect());
             }
+            
+            return;
         }
+
+        SelectedWeapon.Instance.SetSelectedWeapon(_weaponSO.WeaponPrefab);
     }
 
     private void ApplyStylesAccordingToAvailableState(bool availableForPurchaseOrSelect)

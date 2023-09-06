@@ -75,6 +75,7 @@ public class LevelUI : MonoBehaviour
         GameEndedStaticEvent.OnGameEnded += GameEndedStaticEvent_OnGameEnded;
         ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube += ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
         EconomyMadePurchaseStaticEvent.OnMadePurchase += EconomyMadePurchaseStaticEvent_OnMadePurchase;
+        WeaponFiredStaticEvent.OnWeaponFired += WeaponFiredStaticEvent_OnWeaponFired;
     }
 
     private void OnDisable()
@@ -82,6 +83,12 @@ public class LevelUI : MonoBehaviour
         GameEndedStaticEvent.OnGameEnded -= GameEndedStaticEvent_OnGameEnded;
         ProjectileHitScoreCubeStaticEvent.OnProjectileHitScoreCube -= ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube;
         EconomyMadePurchaseStaticEvent.OnMadePurchase -= EconomyMadePurchaseStaticEvent_OnMadePurchase;
+        WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
+    }
+
+    private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs _)
+    {
+        _openWeaponStoreButton.gameObject.SetActive(false);
     }
 
     private void EconomyMadePurchaseStaticEvent_OnMadePurchase()

@@ -17,11 +17,19 @@ public class WeaponStoreScrollAnimator : MonoBehaviour
     private void OnEnable()
     {
         _weaponStoreScrollToggleOpenEvent.OnToggleOpenChange += WeaponStoreScrollToggleOpenEvent_OnToggleOpenChange;
+        WeaponFiredStaticEvent.OnWeaponFired += WeaponFiredStaticEvent_OnWeaponFired;
     }
 
     private void OnDisable()
     {
         _weaponStoreScrollToggleOpenEvent.OnToggleOpenChange -= WeaponStoreScrollToggleOpenEvent_OnToggleOpenChange;
+        WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
+    }
+
+    private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs _)
+    {
+        _animator.SetTrigger(WeaponStoreScrollAnimationParams.OnClose);
+        WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
     }
 
     private void WeaponStoreScrollToggleOpenEvent_OnToggleOpenChange(WeaponStoreScrollToggleOpenEventArgs weaponStoreScrollToggleOpenEventArgs)

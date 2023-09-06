@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent (typeof(EnemyHitEvent))]
+[SelectionBase]
 [DisallowMultipleComponent]
 public class Enemy : MonoBehaviour
 {

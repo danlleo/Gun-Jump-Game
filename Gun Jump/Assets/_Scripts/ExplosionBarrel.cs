@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[SelectionBase]
 [RequireComponent(typeof(CapsuleCollider))]
 public class ExplosionBarrel : MonoBehaviour, IHittable
 {

@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -12,7 +14,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         SaveGameData = SaveLoaderController.Load();
-        CurrentGameState = GameState.GameEnded;
+        CurrentGameState = GameState.GameStarted;
         CurrentLevel = SaveGameData.CurrentLevel;
 
         Economy.CleanCurrentLevelMoneyAmount();
@@ -25,6 +27,7 @@ public class GameManager : Singleton<GameManager>
         WeaponFiredStaticEvent.OnWeaponFired += WeaponFiredStaticEvent_OnWeaponFired;
         GameEndedStaticEvent.OnGameEnded += GameEndedStaticEvent_OnGameEnded;
         EconomyMadePurchaseStaticEvent.OnMadePurchase += EconomyMadePurchaseStaticEvent_OnMadePurchase;
+        WeaponFallingStaticEvent.OnWeaponFalling += WeaponFallingStaticEvent_OnWeaponFalling;
     }
 
     private void OnDisable()
@@ -33,6 +36,12 @@ public class GameManager : Singleton<GameManager>
         WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
         GameEndedStaticEvent.OnGameEnded -= GameEndedStaticEvent_OnGameEnded;
         EconomyMadePurchaseStaticEvent.OnMadePurchase -= EconomyMadePurchaseStaticEvent_OnMadePurchase;
+        WeaponFallingStaticEvent.OnWeaponFalling -= WeaponFallingStaticEvent_OnWeaponFalling;
+    }
+
+    private void WeaponFallingStaticEvent_OnWeaponFalling()
+    {
+        StartCoroutine(ReloadCurrentSceneAfterDelayRoutine(1.75f));
     }
 
     private void EconomyMadePurchaseStaticEvent_OnMadePurchase()
@@ -40,13 +49,17 @@ public class GameManager : Singleton<GameManager>
         SaveLoaderController.Save(SaveGameData);
     }
 
-#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
             SaveLoaderController.DeleteSave();
+
+        if (PlayerInputHandler.IsMouseButtonDownThisFrame())
+        {
+            if (CurrentGameState == GameState.GameStarted)
+                CurrentGameState = GameState.PlayingLevel;
+        }
     }
-#endif
 
     private void GameEndedStaticEvent_OnGameEnded()
     {
@@ -73,5 +86,11 @@ public class GameManager : Singleton<GameManager>
     {
         CurrentLevel++;
         SaveGameData.CurrentLevel = CurrentLevel;
+    }
+
+    private IEnumerator ReloadCurrentSceneAfterDelayRoutine(float delayInSeconds)
+    {
+        yield return new WaitForSeconds(delayInSeconds);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
