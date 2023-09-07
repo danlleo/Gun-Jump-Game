@@ -11,6 +11,7 @@ namespace _Scripts.UI.WeaponScrollSelectItem
     [DisallowMultipleComponent]
     public class WeaponScrollSelectItem : MonoBehaviour, IPointerClickHandler
     {
+        [SerializeField] private WeaponStoreScroll.WeaponStoreScroll _weaponStoreScroll;
         [SerializeField] private WeaponSO _weaponSO;
         [SerializeField] private Color _availableBackgroundColor;
         [SerializeField] private Color _unavailableBackgroundColor;
@@ -29,17 +30,19 @@ namespace _Scripts.UI.WeaponScrollSelectItem
         {
             if (!IsWeaponPurchased())
             {
-                if (Economy.Economy.TryPurchaseWeapon(_weaponSO.PriceToUnlock) && IsAvailableForPurchaseOrSelect())
-                {
-                    GameManager.Instance.SaveGameData.PurchasedWeaponPrefabIDList.Add(_weaponSO.WeaponID);
-                    EconomyMadePurchaseStaticEvent.CallMadePurchaseEvent();
-                    ApplyStylesAccordingToAvailableState(IsAvailableForPurchaseOrSelect());
-                }
-            
+                if (!Economy.Economy.TryPurchaseWeapon(_weaponSO.PriceToUnlock) ||
+                    !IsAvailableForPurchaseOrSelect()) return;
+                
+                GameManager.Instance.SaveGameData.PurchasedWeaponPrefabIDList.Add(_weaponSO.WeaponID);
+                EconomyMadePurchaseStaticEvent.CallMadePurchaseEvent();
+                ApplyStylesAccordingToAvailableState(IsAvailableForPurchaseOrSelect());
+
                 return;
             }
 
+            _weaponStoreScroll.SelectedWeaponChangeEvent.CallSelectedWeaponChangeEvent(_weaponSO);
             SelectedWeapon.Instance.SetSelectedWeapon(_weaponSO.WeaponPrefab);
+            GameManager.Instance.SaveSelectedWeapon(_weaponSO);
         }
 
         private void ApplyStylesAccordingToAvailableState(bool availableForPurchaseOrSelect)

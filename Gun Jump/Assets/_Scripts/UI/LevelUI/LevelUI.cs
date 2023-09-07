@@ -31,6 +31,7 @@ namespace _Scripts.UI.LevelUI
         [SerializeField] private Transform _coinIconGroupTransform;
         [SerializeField] private Transform _targetCoinMoveTransform;
         [SerializeField] private Image _progressBarForeground;
+        [SerializeField] private Image _moneyMultiplierBackgroundImage;
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _openWeaponStoreButton;
         [SerializeField] private WeaponStoreScroll.WeaponStoreScroll _weaponStoreScroll;
@@ -94,25 +95,7 @@ namespace _Scripts.UI.LevelUI
             EconomyMadePurchaseStaticEvent.OnMadePurchase -= EconomyMadePurchaseStaticEvent_OnMadePurchase;
             WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
         }
-
-        private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs _)
-        {
-            _openWeaponStoreButton.gameObject.SetActive(false);
-        }
-
-        private void EconomyMadePurchaseStaticEvent_OnMadePurchase()
-        {
-            UpdateMoneyAmountText(Economy.Economy.TotalMoneyAmount);
-        }
-
-        private void GameEndedStaticEvent_OnGameEnded()
-        {
-            _progressBarUIGameObject.SetActive(false);
-            _gameOverUIGameObject.SetActive(true);
-            UpdateMoneyAmountReceivedFromCurrentLevelText();
-            StartCoroutine(EndGameUIAnimationRoutine(Economy.Economy.CurrentLevelMoneyAmount, 100));
-        }
-
+        
         private void UpdateMoneyAmountText(int amount)
             => _moneyAmountText.text = $"{amount}";
 
@@ -122,11 +105,14 @@ namespace _Scripts.UI.LevelUI
         private void UpdateMoneyMultipliedText(int multiplierAmount)
             => _moneyMultiplierText.text = $"X{multiplierAmount}";
 
+        private void UpdateMoneyMultiplierBackgroundColor(Color targetColor)
+            => _moneyMultiplierBackgroundImage.color = targetColor;
+        
         private void UpdateMoneyAmountReceivedFromCurrentLevelText()
         {
             if (Economy.Economy.CurrentLevelMoneyAmount == 0)
             {
-                _moneyAmountReceivedFromCurrentLevelText.text = $"{Economy.Economy.DefaultMoneyAmountToAdd}";
+                _moneyAmountReceivedFromCurrentLevelText.text = $"{Economy.Economy.DEFAULT_MONEY_AMOUNT_TO_ADD}";
                 return;
             }
 
@@ -142,6 +128,26 @@ namespace _Scripts.UI.LevelUI
         private void ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube(ProjectileHitScoreCubeEventArgs projectileHitScoreCubeEventArgs)
         {
             UpdateMoneyMultipliedText(projectileHitScoreCubeEventArgs.MoneyMultiplierAmount);
+            UpdateMoneyMultiplierBackgroundColor(projectileHitScoreCubeEventArgs.ScoreCubeColor);
+            UpdateMoneyAmountReceivedFromCurrentLevelText();
+            StartCoroutine(EndGameUIAnimationRoutine(Economy.Economy.CurrentLevelMoneyAmount, projectileHitScoreCubeEventArgs.MoneyMultiplierAmount));
+        }
+        
+        private void GameEndedStaticEvent_OnGameEnded()
+        {
+            _progressBarUIGameObject.SetActive(false);
+            _gameOverUIGameObject.SetActive(true);
+        }
+
+        private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs _)
+        {
+            _openWeaponStoreButton.gameObject.SetActive(false);
+            WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
+        }
+
+        private void EconomyMadePurchaseStaticEvent_OnMadePurchase()
+        {
+            UpdateMoneyAmountText(Economy.Economy.TotalMoneyAmount);
         }
 
         private void InstantiateCoinPrefabsAtRandomPositions(int amountCoinIconsToSpawn)

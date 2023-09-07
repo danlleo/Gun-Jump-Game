@@ -1,5 +1,7 @@
+using System;
 using _Scripts.Misc;
 using _Scripts.StaticEvents.Weapon;
+using _Scripts.Utilities.GameManager;
 using UnityEngine;
 
 namespace _Scripts.Weapons
@@ -15,6 +17,11 @@ namespace _Scripts.Weapons
         {
             base.Awake();
             _selectedWeapon.transform.position = _weaponSpawnTransform.position;
+        }
+
+        private void Start()
+        {
+            SetSelectedWeapon(GameManager.Instance.SaveGameData.SelectedWeaponID);
         }
 
         private void Update()
@@ -35,6 +42,24 @@ namespace _Scripts.Weapons
                 if (!weaponTransform.TryGetComponent(out Weapon weapon)) continue;
                 
                 if (weapon.GetType() == weaponToSelect.GetType())
+                {
+                    _selectedWeapon = weapon;
+                    weaponTransform.position = _weaponSpawnTransform.position;
+                    weaponTransform.gameObject.SetActive(true);
+                    continue;
+                }
+                
+                weaponTransform.gameObject.SetActive(false);
+            }
+        }
+        
+        public void SetSelectedWeapon(string weaponToSelectID)
+        {
+            foreach (Transform weaponTransform in transform)
+            {
+                if (!weaponTransform.TryGetComponent(out Weapon weapon)) continue;
+                
+                if (weapon.WeaponSO.WeaponID == weaponToSelectID)
                 {
                     _selectedWeapon = weapon;
                     weaponTransform.position = _weaponSpawnTransform.position;

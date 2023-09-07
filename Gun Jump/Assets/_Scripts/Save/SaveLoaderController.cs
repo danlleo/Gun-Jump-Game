@@ -18,7 +18,8 @@ namespace _Scripts.Save
             {
                 MoneyAmount = passedSaveData.MoneyAmount,
                 CurrentLevel = passedSaveData.CurrentLevel,
-                PurchasedWeaponPrefabIDList = passedSaveData.PurchasedWeaponPrefabIDList
+                PurchasedWeaponPrefabIDList = passedSaveData.PurchasedWeaponPrefabIDList,
+                SelectedWeaponID = passedSaveData.SelectedWeaponID
             };
 
             string json = JsonUtility.ToJson(saveData);
@@ -63,17 +64,14 @@ namespace _Scripts.Save
                 {
                     // Give player only pistol as a default weapon
                     PISTOL_ITEM_PREFAB_ID,
-                }
+                },
+                SelectedWeaponID = PISTOL_ITEM_PREFAB_ID
             };
 
             string json = JsonUtility.ToJson(saveData);
 
             File.WriteAllText(s_saveFilePath, json);
-
-#if UNITY_EDITOR
-            Debug.Log("Game Saved");
-#endif
-
+            
             Save(saveData);
 
             return saveData;

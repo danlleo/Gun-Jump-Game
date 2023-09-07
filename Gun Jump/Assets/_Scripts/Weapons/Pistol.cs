@@ -11,6 +11,7 @@ namespace _Scripts.Weapons
     {
         [SerializeField] private AudioClip _shotClip;
         [SerializeField] private WeaponDetailsSO _pistolDetails;
+        [SerializeField] private WeaponSO _weaponSO;
         [SerializeField] private Transform _projectileSpawnPoint;
         [SerializeField] private ParticleSystem _muzzleFlashEffect;
 
@@ -38,6 +39,7 @@ namespace _Scripts.Weapons
         protected override Rigidbody RB => _rb;
 
         protected override WeaponDetailsSO WeaponDetails => _pistolDetails;
+        public override WeaponSO WeaponSO => _weaponSO;
 
         protected override Transform WeaponProjectileSpawnPoint => _projectileSpawnPoint;
 

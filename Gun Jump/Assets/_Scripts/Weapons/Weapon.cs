@@ -10,6 +10,7 @@ namespace _Scripts.Weapons
     {
         protected abstract Rigidbody RB { get; }
         protected abstract WeaponDetailsSO WeaponDetails { get; }
+        public abstract WeaponSO WeaponSO { get; }
         protected abstract Transform WeaponProjectileSpawnPoint { get; }
 
         /// <summary>

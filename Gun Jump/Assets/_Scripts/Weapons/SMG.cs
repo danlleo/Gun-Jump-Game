@@ -9,6 +9,7 @@ namespace _Scripts.Weapons
     public class SMG : Weapon
     {
         [SerializeField] private WeaponDetailsSO _smgDetails;
+        [SerializeField] private WeaponSO _weaponSO;
         [SerializeField] private Transform _projectileSpawnPoint;
 
         private Rigidbody _rb;
@@ -51,6 +52,7 @@ namespace _Scripts.Weapons
         protected override Rigidbody RB => _rb;
 
         protected override WeaponDetailsSO WeaponDetails => _smgDetails;
+        public override WeaponSO WeaponSO => _weaponSO;
 
         protected override Transform WeaponProjectileSpawnPoint => _projectileSpawnPoint;
 

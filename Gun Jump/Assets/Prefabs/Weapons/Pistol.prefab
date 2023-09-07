@@ -9887,6 +9887,7 @@ MonoBehaviour:
   _pistolDetails: {fileID: 11400000, guid: f6b077aa6620b7249995580bfd838ef4, type: 2}
   _projectileSpawnPoint: {fileID: 5807923279650432989}
   _muzzleFlashEffect: {fileID: 3231562036909938068}
+  _weaponSO: {fileID: 11400000, guid: 1859d9a2a4a14cd409047923fdc26c0e, type: 2}
 --- !u!1 &4439047303618791285
 GameObject:
   m_ObjectHideFlags: 0

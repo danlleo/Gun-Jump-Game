@@ -9,6 +9,7 @@ namespace _Scripts.ScoreCubes
     public class ScoreCube : MonoBehaviour, IHittable
     {
         [SerializeField] private Transform _cubeTopPosition;
+        [SerializeField] private Color _cubeMultipliedColor;
         [SerializeField] private int _moneyMultiplierAmount;
 
         private bool _canDestroy = true;
@@ -30,8 +31,8 @@ namespace _Scripts.ScoreCubes
             if (!_canDestroy)
                 return;
 
-            ProjectileHitScoreCubeStaticEvent.CallProjectileHitScoreCubeEvent(_moneyMultiplierAmount, transform.position, _canDestroy);
             Economy.Economy.CalculateReceivedMoneyFromScoreCubeAndAddToCurrentAmount(_moneyMultiplierAmount);
+            ProjectileHitScoreCubeStaticEvent.CallProjectileHitScoreCubeEvent(_moneyMultiplierAmount, transform.position, _canDestroy, _cubeMultipliedColor);
 
             Destroy(gameObject);
         }

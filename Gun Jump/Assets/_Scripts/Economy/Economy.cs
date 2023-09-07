@@ -8,14 +8,15 @@ namespace _Scripts.Economy
         public static int TotalMoneyAmountBeforeBeatingLevel { private set; get; }
         public static int TotalMoneyAmount { private set; get; }
 
-        public static readonly int DefaultMoneyAmountToAdd = 100;
+        public const int DEFAULT_MONEY_AMOUNT_TO_ADD = 100;
 
         public static void CalculateReceivedMoneyFromScoreCubeAndAddToCurrentAmount(int bonusEarningAmount)
         {
             if (bonusEarningAmount <= 0)
                 throw new ArgumentException("Bonus Earning Amount cannot be less or equal to zero");
 
-            TotalMoneyAmount += DefaultMoneyAmountToAdd + CurrentLevelMoneyAmount * bonusEarningAmount;
+            CurrentLevelMoneyAmount += DEFAULT_MONEY_AMOUNT_TO_ADD;
+            TotalMoneyAmount += CurrentLevelMoneyAmount * bonusEarningAmount;
         }
 
         public static void AddMoneyForKillingEnemy(bool hasDiedOutOfHeadshot)
@@ -27,6 +28,14 @@ namespace _Scripts.Economy
         public static void CleanCurrentLevelMoneyAmount()
             => CurrentLevelMoneyAmount = 0;
 
+        public static void SetTotalMoneyAmountBeforeBeatingLevel(int moneyAmount)
+        {
+            if (moneyAmount < 0)
+                throw new ArgumentException("Money amount cannot be less than zero!");
+
+            TotalMoneyAmountBeforeBeatingLevel = moneyAmount;
+        }
+        
         public static void SetTotalMoneyAmount(int totalMoneyAmount)
         {
             if (totalMoneyAmount < 0)

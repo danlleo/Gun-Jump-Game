@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _smgDetails: {fileID: 11400000, guid: d9114e8dd8d604e41a5a054e6e6399d2, type: 2}
   _projectileSpawnPoint: {fileID: 7077205566080106198}
+  _weaponSO: {fileID: 11400000, guid: 8bd792f7ace63604993f7c2284c5e9ea, type: 2}
 --- !u!1001 &1720348962585469980
 PrefabInstance:
   m_ObjectHideFlags: 0

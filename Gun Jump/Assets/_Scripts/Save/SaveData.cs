@@ -8,5 +8,6 @@ namespace _Scripts.Save
         public int MoneyAmount;
         public int CurrentLevel;
         public List<string> PurchasedWeaponPrefabIDList;
+        public string SelectedWeaponID;
     }
 }

@@ -6,13 +6,13 @@ using _Scripts.StaticEvents.Economy;
 using _Scripts.StaticEvents.GameManager;
 using _Scripts.StaticEvents.ScoreCube;
 using _Scripts.StaticEvents.Weapon;
+using _Scripts.Weapons;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace _Scripts.Utilities.GameManager
 {
-    public class 
-        GameManager : Singleton<GameManager>
+    public class GameManager : Singleton<GameManager>
     {
         public GameState CurrentGameState { get; private set; }
         public SaveData SaveGameData { get; private set; }
@@ -28,6 +28,7 @@ namespace _Scripts.Utilities.GameManager
             CurrentLevel = SaveGameData.CurrentLevel;
 
             Economy.Economy.CleanCurrentLevelMoneyAmount();
+            Economy.Economy.SetTotalMoneyAmountBeforeBeatingLevel(SaveGameData.MoneyAmount);
             Economy.Economy.SetTotalMoneyAmount(SaveGameData.MoneyAmount);
         }
 
@@ -69,6 +70,12 @@ namespace _Scripts.Utilities.GameManager
                 CurrentGameState = GameState.PLAYING_LEVEL;
         }
 
+        public void SaveSelectedWeapon(WeaponSO weapon)
+        {
+            SaveGameData.SelectedWeaponID = weapon.WeaponID;
+            SaveLoaderController.Save(SaveGameData);
+        }
+        
         public void SetSlowMotionGameState()
             => CurrentGameState = GameState.IN_SLOW_MOTION;
 

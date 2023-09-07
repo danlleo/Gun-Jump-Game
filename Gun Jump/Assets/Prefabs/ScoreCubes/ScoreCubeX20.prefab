@@ -25,6 +25,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1518529537868515220, guid: b606cf7a39f0d014eb9e657ab471cecd,
         type: 3}
+      propertyPath: _cubeMultipliedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518529537868515220, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: _cubeMultipliedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518529537868515220, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: _cubeMultipliedColor.g
+      value: 0.6978071
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518529537868515220, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
+      propertyPath: _cubeMultipliedColor.r
+      value: 0.8679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518529537868515220, guid: b606cf7a39f0d014eb9e657ab471cecd,
+        type: 3}
       propertyPath: _moneyMultiplierAmount
       value: 20
       objectReference: {fileID: 0}
