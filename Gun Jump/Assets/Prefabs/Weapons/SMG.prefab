@@ -65,7 +65,7 @@ Transform:
   - {fileID: 1176936183857611767}
   - {fileID: 7077205566080106198}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2360296255061495756
 Rigidbody:
@@ -127,9 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5387006b3f1862944af42d113b092624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shotClip: {fileID: 8300000, guid: 88fc09ad09a9cb84a8a1eb7c49601541, type: 3}
   _smgDetails: {fileID: 11400000, guid: d9114e8dd8d604e41a5a054e6e6399d2, type: 2}
-  _projectileSpawnPoint: {fileID: 7077205566080106198}
   _weaponSO: {fileID: 11400000, guid: 8bd792f7ace63604993f7c2284c5e9ea, type: 2}
+  _projectileSpawnPoint: {fileID: 7077205566080106198}
 --- !u!1001 &1720348962585469980
 PrefabInstance:
   m_ObjectHideFlags: 0

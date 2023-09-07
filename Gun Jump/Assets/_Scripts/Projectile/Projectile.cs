@@ -18,7 +18,8 @@ namespace _Scripts.Projectile
         private Vector3 _direction;
         private TrailRenderer _trailRenderer;
 
-        private readonly float _moveSpeed = 5f;
+        private float _moveSpeed = 5f;
+        
         private readonly float _bounceAngleDeviation = 30f;
         private readonly float _hitCheckDistance = .15f;
 
@@ -43,12 +44,13 @@ namespace _Scripts.Projectile
             CheckScreenBoundaries();
         }
 
-        public void Initialize(Vector3 direction, Vector3 startPosition, bool canRicochet, bool canGoTroughBodies)
+        public void Initialize(Vector3 direction, Vector3 startPosition, bool canRicochet, bool canGoTroughBodies, float moveSpeed)
         {
             _direction = direction;
             transform.position = startPosition;
             _canRicochet = canRicochet;
             CanGoThroughBodies = canGoTroughBodies;
+            _moveSpeed = moveSpeed;
         }
 
         private void DoRicochet(Vector3 surfaceNormal)

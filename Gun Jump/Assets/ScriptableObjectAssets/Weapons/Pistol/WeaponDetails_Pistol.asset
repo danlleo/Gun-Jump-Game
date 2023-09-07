@@ -19,5 +19,6 @@ MonoBehaviour:
   _jumpForce: 2.25
   _sideForce: 3
   _bounceBackForce: 40
+  _projectileMoveSpeed: 6
   _projectilesCanRicochet: 0
   _projectilesCanGoTroughBodies: 0

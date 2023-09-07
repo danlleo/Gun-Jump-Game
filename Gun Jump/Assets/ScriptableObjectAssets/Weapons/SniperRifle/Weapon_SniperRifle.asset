@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f53ab0a46a88144ba24c310ad1f6e76, type: 3}
+  m_Name: Weapon_SniperRifle
+  m_EditorClassIdentifier: 
+  _weaponName: Sniper Rifle
+  _weaponID: 2c0bced2-0d9a-4e43-9cb4-149736eeec10
+  _requiredLevelToUnlock: 50
+  _priceToUnlock: 300000
+  _weaponDetails: {fileID: 11400000, guid: f9a8446705b546646bd7c52da6515fe0, type: 2}
+  _weaponPrefab: {fileID: 1157069982373345126, guid: 064aefee994a1f8408ea4d56d7f903a8,
+    type: 3}

@@ -1,3 +1,4 @@
+using _Scripts.Audio;
 using _Scripts.Enums;
 using _Scripts.Misc;
 using _Scripts.Projectile;
@@ -8,6 +9,7 @@ namespace _Scripts.Weapons
 {
     public class SMG : Weapon
     {
+        [SerializeField] private AudioClip _shotClip;
         [SerializeField] private WeaponDetailsSO _smgDetails;
         [SerializeField] private WeaponSO _weaponSO;
         [SerializeField] private Transform _projectileSpawnPoint;
@@ -59,9 +61,11 @@ namespace _Scripts.Weapons
         protected override void Fire()
         {
             base.Fire();
-
+            
+            AudioController.Instance.PlaySound(_shotClip, .755f);
+            
             var projectile = ProjectilePool.Instance.GetPooledObject();
-            projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _smgDetails.ProjectilesCanRicochet, _smgDetails.ProjectilesCanGoTroughBodies);
+            projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _smgDetails.ProjectilesCanRicochet, _smgDetails.ProjectilesCanGoTroughBodies, _smgDetails.ProjectileMoveSpeed);
 
             ResetFireRateTimer();
         }

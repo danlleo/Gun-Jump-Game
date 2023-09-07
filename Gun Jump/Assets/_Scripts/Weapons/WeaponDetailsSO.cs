@@ -25,10 +25,12 @@ namespace _Scripts.Weapons
 
         #region WEAPON'S PROJECTILE PROPERTIES
 
-        [Space(10)]
-        [Header("Weapon's Projectile Properties")]
-        [Space(5)]
-
+        [Space(10)] 
+        [Header("Weapon's Projectile Properties")] 
+        [Space(5)] 
+        
+        [SerializeField] private float _projectileMoveSpeed;
+        
         [SerializeField] private bool _projectilesCanRicochet;
         [SerializeField] private bool _projectilesCanGoTroughBodies;
 
@@ -45,6 +47,7 @@ namespace _Scripts.Weapons
         public float JumpForce => _jumpForce;
         public float SideForce => _sideForce;
         public float BounceBackForce => _bounceBackForce;
+        public float ProjectileMoveSpeed => _projectileMoveSpeed;
         public bool ProjectilesCanRicochet => _projectilesCanRicochet;
         public bool ProjectilesCanGoTroughBodies => _projectilesCanGoTroughBodies;
 

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 925990e1071bd834695a8bca45307308, type: 3}
-  m_Name: WeaponDetails_Shotgun
+  m_Name: WeaponDetails_SniperRifle
   m_EditorClassIdentifier: 
   _maxAngularVelocity: 10
   _torque: 140
@@ -19,6 +19,6 @@ MonoBehaviour:
   _jumpForce: 2
   _sideForce: 2
   _bounceBackForce: 45
-  _projectileMoveSpeed: 5
+  _projectileMoveSpeed: 11.5
   _projectilesCanRicochet: 1
-  _projectilesCanGoTroughBodies: 0
+  _projectilesCanGoTroughBodies: 1

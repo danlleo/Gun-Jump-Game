@@ -7,13 +7,12 @@ using UnityEngine;
 
 namespace _Scripts.Weapons
 {
-    public class Pistol : Weapon
+    public class SniperRifle : Weapon
     {
         [SerializeField] private AudioClip _shotClip;
-        [SerializeField] private WeaponDetailsSO _pistolDetails;
+        [SerializeField] private WeaponDetailsSO _sniperRifleDetails;
         [SerializeField] private WeaponSO _weaponSO;
         [SerializeField] private Transform _projectileSpawnPoint;
-        [SerializeField] private ParticleSystem _muzzleFlashEffect;
 
         private Rigidbody _rb;
 
@@ -30,15 +29,15 @@ namespace _Scripts.Weapons
             if (!PlayerInputHandler.IsMouseButtonDownThisFrame()) return;
             if (PlayerInputHandler.IsMouseOverInteractableUIElement())
                 return;
-
+            
             Fire();
             ApplyTorque();
             BounceBack();
         }
 
         protected override Rigidbody RB => _rb;
-
-        protected override WeaponDetailsSO WeaponDetails => _pistolDetails;
+        
+        protected override WeaponDetailsSO WeaponDetails => _sniperRifleDetails;
         
         public override WeaponSO WeaponSO => _weaponSO;
 
@@ -48,11 +47,10 @@ namespace _Scripts.Weapons
         {
             base.Fire();
 
-            _muzzleFlashEffect.Play();
-            AudioController.Instance.PlaySound(_shotClip, .655f);
-
+            AudioController.Instance.PlaySound(_shotClip, .7f);
+            
             var projectile = ProjectilePool.Instance.GetPooledObject();
-            projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _pistolDetails.ProjectilesCanRicochet, _pistolDetails.ProjectilesCanGoTroughBodies, _pistolDetails.ProjectileMoveSpeed);
+            projectile.Initialize(transform.forward, _projectileSpawnPoint.position, _sniperRifleDetails.ProjectilesCanRicochet, _sniperRifleDetails.ProjectilesCanGoTroughBodies, _sniperRifleDetails.ProjectileMoveSpeed);
         }
     }
 }

@@ -61,7 +61,8 @@ namespace _Scripts.Weapons
                     transform.forward + transform.up * (i % 2 == 0 ? _normalizedProjectileSpreadAngle : -_normalizedProjectileSpreadAngle),
                     _projectileSpawnPoint.position,
                     _shotgunDetails.ProjectilesCanRicochet,
-                    _shotgunDetails.ProjectilesCanGoTroughBodies
+                    _shotgunDetails.ProjectilesCanGoTroughBodies,
+                    _shotgunDetails.ProjectileMoveSpeed
                 );
             }
         }
