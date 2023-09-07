@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using _Scripts.Enemy;
+using _Scripts.Enums;
 using _Scripts.ScoreCubes;
 using _Scripts.StaticEvents.Weapon;
 using _Scripts.Utilities;
+using _Scripts.Utilities.GameManager;
 using UnityEngine;
 
 namespace _Scripts.Misc
@@ -13,8 +16,8 @@ namespace _Scripts.Misc
         private float _originalTimeScale;
         private float _originalFixedDeltaTime;
 
-        private float _slowMotionInDuration = .30f;
-        private float _slowMotionOutDuration = .30f;
+        private readonly float _slowMotionInDuration = .30f;
+        private readonly float _slowMotionOutDuration = .30f;
 
         private Coroutine _slowMotionRoutine;
 
@@ -38,7 +41,6 @@ namespace _Scripts.Misc
 
             ResetTimeScaleAndFixedDeltaTime();
         }
-    
         public void TriggerSlowMotion(float duration, float targetTimeScaleValue)
         {
             targetTimeScaleValue = Mathf.Clamp(targetTimeScaleValue, 0f, 1f);
@@ -48,35 +50,55 @@ namespace _Scripts.Misc
 
             _slowMotionRoutine = StartCoroutine(SlowMotionRoutine(duration, targetTimeScaleValue));
         }
+        
+        public void TriggerSlowMotion(float duration, float targetTimeScaleValue, Action onSlowMotionStarted, Action onSlowMotionEnded)
+        {
+            targetTimeScaleValue = Mathf.Clamp(targetTimeScaleValue, 0f, 1f);
+
+            if (_slowMotionRoutine != null)
+                return;
+
+            _slowMotionRoutine = StartCoroutine(SlowMotionRoutine(duration, targetTimeScaleValue, onSlowMotionStarted, onSlowMotionEnded));
+        }
 
         private void WeaponFiredStaticEvent_OnWeaponFired(WeaponFiredEventArgs weaponFiredEventArgs)
         {
-            Ray ray = new Ray(weaponFiredEventArgs.FiredWeaponShootTransform.position, weaponFiredEventArgs.FiredWeaponShootTransform.forward);
+            var ray = new Ray(weaponFiredEventArgs.FiredWeaponShootTransform.position, weaponFiredEventArgs.FiredWeaponShootTransform.forward);
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f))
+            if (!Physics.Raycast(ray, out RaycastHit hitInfo, 100f)) return;
+            if (hitInfo.collider.TryGetComponent(out EnemyHead enemyHead))
             {
-                if (hitInfo.collider.TryGetComponent(out EnemyHead enemyHead))
-                {
-                    if (!HelperUtilities.IsObjectWithingScreenBoundaries(enemyHead.transform.position))
-                        return;
-
-                    TriggerSlowMotion(0.2f, 0.4f);
+                if (!HelperUtilities.IsObjectWithingScreenBoundaries(enemyHead.transform.position))
                     return;
-                }
-
-                if (hitInfo.collider.TryGetComponent(out ScoreCube scoreCube))
-                {
-                    if (!HelperUtilities.IsObjectWithingScreenBoundaries(scoreCube.transform.position))
-                        return;
-
-                    TriggerSlowMotion(0.2f, 0.1f);
-                    return;
-                }
+                
+                // If we shoot in the enemy's head, put the game in slow motion and disable controls
+                TriggerSlowMotion(0.2f, 0.4f, () =>
+                    {
+                        GameManager.Instance.SetSlowMotionGameState();
+                    },
+                    (() =>
+                    {
+                        GameManager.Instance.SetPlayingLevelGameState();
+                    }));
+                
+                return;
             }
+
+            if (!hitInfo.collider.TryGetComponent(out ScoreCube scoreCube)) return;
+            if (!HelperUtilities.IsObjectWithingScreenBoundaries(scoreCube.transform.position))
+                return;
+
+            // If We hit the Score Cube put the game in slow motion and disable controls
+            TriggerSlowMotion(0.2f, 0.1f, () =>
+                {
+                    GameManager.Instance.SetSlowMotionGameState();
+                },
+                () => { });
         }
 
-        private IEnumerator SlowMotionRoutine(float duration, float targetTimeScaleValue)
+        private IEnumerator SlowMotionRoutine(float duration, float targetTimeScaleValue, Action onSlowMotionStarted = null, Action onSlowMotionEnded = null)
         {
+            onSlowMotionStarted?.Invoke();
             // Slow Motion Enter
             float inTimer = 0f;
 
@@ -111,6 +133,7 @@ namespace _Scripts.Misc
             Time.timeScale = _originalTimeScale;
 
             _slowMotionRoutine = null;
+            onSlowMotionEnded?.Invoke();
         }
 
         private void ResetTimeScaleAndFixedDeltaTime()

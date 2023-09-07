@@ -20,8 +20,10 @@ namespace _Scripts.Misc
 
         public static bool IsMouseOverInteractableUIElement()
         {
-            var eventData = new PointerEventData(EventSystem.current);
-            eventData.position = Input.mousePosition;
+            var eventData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
 
             var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventData, results);

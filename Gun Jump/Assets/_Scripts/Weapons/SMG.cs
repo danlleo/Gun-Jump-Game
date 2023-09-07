@@ -21,6 +21,8 @@ namespace _Scripts.Weapons
 
         private void Update()
         {
+            ClampAngularVelocity();
+            
             if (GameManager.Instance.CurrentGameState != GameState.PLAYING_LEVEL)
                 return;
 

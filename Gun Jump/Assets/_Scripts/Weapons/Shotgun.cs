@@ -24,10 +24,10 @@ namespace _Scripts.Weapons
 
         private void Update()
         {
+            ClampAngularVelocity();
+            
             if (GameManager.Instance.CurrentGameState != GameState.PLAYING_LEVEL)
                 return;
-
-            ClampAngularVelocity();
 
             if (!PlayerInputHandler.IsMouseButtonDownThisFrame()) return;
             if (PlayerInputHandler.IsMouseOverInteractableUIElement())

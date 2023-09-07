@@ -6,6 +6,8 @@ namespace _Scripts.Save
 {
     public static class SaveLoaderController
     {
+        private const string PISTOL_ITEM_PREFAB_ID = "01f01438-4bf9-11ee-be56-0242ac120002";
+        
         private static string s_saveFilePath;
 
         public static void Save(SaveData passedSaveData)
@@ -60,7 +62,7 @@ namespace _Scripts.Save
                 PurchasedWeaponPrefabIDList = new List<string>
                 {
                     // Give player only pistol as a default weapon
-                    "01f01438-4bf9-11ee-be56-0242ac120002",
+                    PISTOL_ITEM_PREFAB_ID,
                 }
             };
 

@@ -14,9 +14,7 @@ namespace _Scripts.Audio
         [SerializeField] private AudioSource _effectsSource;
 
         protected override void Awake()
-        {
-            base.Awake();
-        }
+            => base.Awake();
 
         private void OnEnable()
         {
@@ -63,9 +61,6 @@ namespace _Scripts.Audio
                     break; 
                 case 3:
                     PlaySound((_clipRefs.TripleKill));
-                    break;
-
-                default: 
                     break;
             }
         }

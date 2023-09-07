@@ -6,10 +6,10 @@ namespace _Scripts.Misc
 {
     public static class DrowsyLogger
     {
-        private static void DoLog(Action<string, Object> LogFunction, string prefix, Object myObj, object msg)
+        private static void DoLog(Action<string, Object> logFunction, string prefix, Object myObj, object msg)
         {
 #if UNITY_EDITOR
-            LogFunction($"{prefix}[<color=lightblue>{myObj.name}</color>]: {msg}", myObj);
+            logFunction($"{prefix}[<color=lightblue>{myObj.name}</color>]: {msg}", myObj);
 #endif
         }
 

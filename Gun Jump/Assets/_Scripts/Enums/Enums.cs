@@ -5,6 +5,7 @@ namespace _Scripts.Enums
         GAME_STARTED,
         PLAYING_LEVEL,
         FALLING_DOWN,
+        IN_SLOW_MOTION,
         GAME_ENDED,
     }
 }

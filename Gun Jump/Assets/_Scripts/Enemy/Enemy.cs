@@ -10,7 +10,7 @@ namespace _Scripts.Enemy
     {
         [HideInInspector] public EnemyHitEvent EnemyHitEvent;
 
-        [Tooltip("Populate with the collider responsible to detect bodyshots")]
+        [Tooltip("Populate with the collider responsible to detect body shots")]
         [SerializeField] private CapsuleCollider _enemyBodyCapsuleCollider;
 
         [Tooltip("Populate with the collider responsible to detect headshots")]

@@ -6,10 +6,10 @@ namespace _Scripts.Camera
 {
     public class ScreenShake : Singleton<ScreenShake>
     {
-        public float shakeDuration = 0.2f; // Duration of the screen shake
-        public float shakeIntensity = 0.1f; // Intensity of the screen shake
+        [SerializeField] public float _shakeDuration = 0.2f; // Duration of the screen shake
+        [SerializeField] public float _shakeIntensity = 0.1f; // Intensity of the screen shake
 
-        private Vector3 originalPosition;
+        private Vector3 _originalPosition;
 
         protected override void Awake()
         {
@@ -19,7 +19,7 @@ namespace _Scripts.Camera
         public void Shake()
         {
             // Save the camera's original position
-            originalPosition = transform.localPosition;
+            _originalPosition = transform.localPosition;
 
             // Start the coroutine to perform the screen shake
             StartCoroutine(ShakeCoroutine());
@@ -30,13 +30,13 @@ namespace _Scripts.Camera
             float elapsed = 0f;
 
             // Perform the screen shake for the specified duration
-            while (elapsed < shakeDuration)
+            while (elapsed < _shakeDuration)
             {
                 // Generate a random offset for the camera position within the specified intensity
-                Vector3 randomOffset = Random.insideUnitSphere * shakeIntensity;
+                Vector3 randomOffset = Random.insideUnitSphere * _shakeIntensity;
 
                 // Apply the random offset to the camera's position
-                transform.localPosition = originalPosition + randomOffset;
+                transform.localPosition = _originalPosition + randomOffset;
 
                 // Wait for the next frame
                 yield return null;
@@ -45,7 +45,7 @@ namespace _Scripts.Camera
             }
 
             // Reset the camera position to its original position after the shake is finished
-            transform.localPosition = originalPosition;
+            transform.localPosition = _originalPosition;
         }
     }
 }

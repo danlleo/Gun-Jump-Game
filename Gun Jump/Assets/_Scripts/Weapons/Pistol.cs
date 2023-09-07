@@ -21,20 +21,18 @@ namespace _Scripts.Weapons
 
         private void Update()
         {
+            ClampAngularVelocity();
+            
             if (GameManager.Instance.CurrentGameState != GameState.PLAYING_LEVEL)
                 return;
+            
+            if (!PlayerInputHandler.IsMouseButtonDownThisFrame()) return;
+            if (PlayerInputHandler.IsMouseOverInteractableUIElement())
+                return;
 
-            ClampAngularVelocity();
-
-            if (PlayerInputHandler.IsMouseButtonDownThisFrame())
-            {
-                if (PlayerInputHandler.IsMouseOverInteractableUIElement())
-                    return;
-
-                Fire();
-                ApplyTorque();
-                BounceBack();
-            }
+            Fire();
+            ApplyTorque();
+            BounceBack();
         }
 
         protected override Rigidbody RB => _rb;

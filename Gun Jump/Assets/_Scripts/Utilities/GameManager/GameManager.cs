@@ -64,13 +64,17 @@ namespace _Scripts.Utilities.GameManager
             if (Input.GetKeyDown(KeyCode.Space))
                 SaveLoaderController.DeleteSave();
 
-            if (PlayerInputHandler.IsMouseButtonDownThisFrame())
-            {
-                if (CurrentGameState == GameState.GAME_STARTED)
-                    CurrentGameState = GameState.PLAYING_LEVEL;
-            }
+            if (!PlayerInputHandler.IsMouseButtonDownThisFrame()) return;
+            if (CurrentGameState == GameState.GAME_STARTED)
+                CurrentGameState = GameState.PLAYING_LEVEL;
         }
 
+        public void SetSlowMotionGameState()
+            => CurrentGameState = GameState.IN_SLOW_MOTION;
+
+        public void SetPlayingLevelGameState()
+            => CurrentGameState = GameState.PLAYING_LEVEL;
+        
         private void GameEndedStaticEvent_OnGameEnded()
         {
             CurrentGameState = GameState.GAME_ENDED;
