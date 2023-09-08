@@ -1,5 +1,4 @@
 using System.Collections;
-using _Scripts.Camera;
 using _Scripts.Enums;
 using _Scripts.Misc;
 using _Scripts.Save;
@@ -53,6 +52,9 @@ namespace _Scripts.Utilities.GameManager
 
         private void WeaponFallingStaticEvent_OnWeaponFalling()
         {
+            if (CurrentGameState == GameState.GAME_ENDED)
+                return;
+            
             StartCoroutine(ReloadCurrentSceneAfterDelayRoutine(1.75f));
         }
 
@@ -101,7 +103,6 @@ namespace _Scripts.Utilities.GameManager
 
         private void ProjectileHitScoreCubeStaticEvent_OnProjectileHitScoreCube(ProjectileHitScoreCubeEventArgs _)
         {
-            CurrentGameState = GameState.FALLING_DOWN;
             GameEndedStaticEvent.CallGameEndedEvent();
         }
 
