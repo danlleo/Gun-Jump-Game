@@ -14,6 +14,7 @@ namespace _Scripts.Projectile
         [SerializeField] private AudioClip _impactClip;
         [SerializeField] private Transform _hitCheckPointTransform;
         [SerializeField] private Transform _hitImpactEffectPrefab;
+        [SerializeField] private LayerMask _layerMask;
 
         private Vector3 _direction;
         private TrailRenderer _trailRenderer;
@@ -68,7 +69,7 @@ namespace _Scripts.Projectile
 
         private void CheckForHit()
         {
-            if (!Physics.Raycast(_hitCheckPointTransform.position, _direction, out RaycastHit hitInfo, _hitCheckDistance))
+            if (!Physics.Raycast(_hitCheckPointTransform.position, _direction, out RaycastHit hitInfo, _hitCheckDistance, _layerMask))
                 return;
 
             InstantiateHitImpactEffect(hitInfo.point, hitInfo.normal);

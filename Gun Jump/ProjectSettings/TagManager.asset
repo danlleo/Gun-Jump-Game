@@ -34,8 +34,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Ragdoll
+  - Enemy
   - InteractableUI
   m_SortingLayers:
   - name: Default

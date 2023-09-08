@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using _Scripts.Enemy;
-using _Scripts.Enums;
 using _Scripts.ScoreCubes;
 using _Scripts.StaticEvents.Weapon;
 using _Scripts.Utilities;
@@ -21,9 +20,6 @@ namespace _Scripts.Misc
 
         private Coroutine _slowMotionRoutine;
 
-        protected override void Awake()
-            => base.Awake();
-
         private void Start()
         {
             _originalTimeScale = Time.timeScale;
@@ -40,15 +36,6 @@ namespace _Scripts.Misc
             WeaponFiredStaticEvent.OnWeaponFired -= WeaponFiredStaticEvent_OnWeaponFired;
 
             ResetTimeScaleAndFixedDeltaTime();
-        }
-        public void TriggerSlowMotion(float duration, float targetTimeScaleValue)
-        {
-            targetTimeScaleValue = Mathf.Clamp(targetTimeScaleValue, 0f, 1f);
-
-            if (_slowMotionRoutine != null)
-                return;
-
-            _slowMotionRoutine = StartCoroutine(SlowMotionRoutine(duration, targetTimeScaleValue));
         }
         
         public void TriggerSlowMotion(float duration, float targetTimeScaleValue, Action onSlowMotionStarted, Action onSlowMotionEnded)

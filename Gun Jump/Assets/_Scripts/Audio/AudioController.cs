@@ -10,11 +10,7 @@ namespace _Scripts.Audio
     {
         [SerializeField] private AudioClipRefsSO _clipRefs;
 
-        [SerializeField] private AudioSource _musicSource;
         [SerializeField] private AudioSource _effectsSource;
-
-        protected override void Awake()
-            => base.Awake();
 
         private void OnEnable()
         {

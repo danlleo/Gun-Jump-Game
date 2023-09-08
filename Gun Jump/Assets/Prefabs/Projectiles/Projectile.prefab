@@ -165,6 +165,9 @@ MonoBehaviour:
   _hitCheckPointTransform: {fileID: 5667939352440465295}
   _hitImpactEffectPrefab: {fileID: 400002, guid: e74af37e539075d428c1f7bd8cdb781d,
     type: 3}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 1073741889
 --- !u!96 &7122262204888519764
 TrailRenderer:
   serializedVersion: 3
