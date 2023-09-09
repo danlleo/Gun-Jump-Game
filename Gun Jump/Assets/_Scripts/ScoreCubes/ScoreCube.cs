@@ -1,3 +1,4 @@
+using _Scripts.Camera;
 using _Scripts.Interfaces;
 using _Scripts.Projectile;
 using _Scripts.StaticEvents.ScoreCube;
@@ -33,7 +34,8 @@ namespace _Scripts.ScoreCubes
 
             Economy.Economy.CalculateReceivedMoneyFromScoreCubeAndAddToCurrentAmount(_moneyMultiplierAmount);
             ProjectileHitScoreCubeStaticEvent.CallProjectileHitScoreCubeEvent(_moneyMultiplierAmount, transform.position, _canDestroy, _cubeMultipliedColor);
-
+            ScreenShake.Instance.ShakeCamera(1.45f, .55f);
+            
             Destroy(gameObject);
         }
 

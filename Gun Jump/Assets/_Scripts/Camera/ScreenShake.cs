@@ -1,51 +1,65 @@
-using System.Collections;
 using _Scripts.Misc;
+using Cinemachine;
 using UnityEngine;
 
 namespace _Scripts.Camera
 {
     public class ScreenShake : Singleton<ScreenShake>
     {
-        [SerializeField] public float _shakeDuration = 0.2f; // Duration of the screen shake
-        [SerializeField] public float _shakeIntensity = 0.1f; // Intensity of the screen shake
+        [SerializeField] private float _shakeIntensity = 1f; // Intensity of the screen shake
+        [SerializeField] private float _shakeDuration = 0.2f; // Duration of the screen shake
 
-        private Vector3 _originalPosition;
+        private float _timer;
+        
+        private CinemachineVirtualCamera _cinemachineVirtualCamera;
 
         protected override void Awake()
         {
             base.Awake();
+            _cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
         }
 
-        public void Shake()
+        private void Start()
         {
-            // Save the camera's original position
-            _originalPosition = transform.localPosition;
-
-            // Start the coroutine to perform the screen shake
-            StartCoroutine(ShakeCoroutine());
+            StopShake();
         }
 
-        private IEnumerator ShakeCoroutine()
+        public void ShakeCamera()
         {
-            float elapsed = 0f;
+            var cinemachineBasicMultiChannelPerlin =
+                _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = _shakeIntensity;
 
-            // Perform the screen shake for the specified duration
-            while (elapsed < _shakeDuration)
-            {
-                // Generate a random offset for the camera position within the specified intensity
-                Vector3 randomOffset = Random.insideUnitSphere * _shakeIntensity;
+            _timer = _shakeDuration;
+        }
 
-                // Apply the random offset to the camera's position
-                transform.localPosition = _originalPosition + randomOffset;
+        public void ShakeCamera(float shakeIntensity, float shakeDuration)
+        {
+            var cinemachineBasicMultiChannelPerlin =
+                _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            
+            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = shakeIntensity;
 
-                // Wait for the next frame
-                yield return null;
+            _timer = shakeDuration;
+        }
 
-                elapsed += Time.deltaTime;
-            }
+        private void StopShake()
+        {
+            var cinemachineBasicMultiChannelPerlin =
+                _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0f;
 
-            // Reset the camera position to its original position after the shake is finished
-            transform.localPosition = _originalPosition;
+            _timer = 0f;
+        }
+
+        private void Update()
+        {
+            if (!(_timer > 0)) return;
+            
+            _timer -= Time.deltaTime;
+                
+            if (_timer <= 0f)
+                StopShake();
         }
     }
 }

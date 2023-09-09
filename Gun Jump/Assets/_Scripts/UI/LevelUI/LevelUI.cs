@@ -57,8 +57,11 @@ namespace _Scripts.UI.LevelUI
         {
             _continueButton.onClick.AddListener(() =>
             {
-                // Reload the current scene
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                int sceneCount = SceneManager.sceneCountInBuildSettings;
+                int randomSceneIndex = Random.Range(0, sceneCount);
+                
+                // Load random scene
+                SceneManager.LoadScene(randomSceneIndex);
             });
 
             _openWeaponStoreButton.onClick.AddListener(() =>

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: WeaponDetails_SniperRifle
   m_EditorClassIdentifier: 
   _maxAngularVelocity: 10
-  _torque: 140
-  _maxTorqueBonus: 150
+  _torque: 120
+  _maxTorqueBonus: 125
   _maxJumpHeight: 5.5
   _jumpForce: 2
-  _sideForce: 2
+  _sideForce: 2.15
   _bounceBackForce: 45
   _projectileMoveSpeed: 11.5
   _projectilesCanRicochet: 1

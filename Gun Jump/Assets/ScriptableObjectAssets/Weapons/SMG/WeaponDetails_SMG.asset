@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925990e1071bd834695a8bca45307308, type: 3}
   m_Name: WeaponDetails_SMG
   m_EditorClassIdentifier: 
-  _maxAngularVelocity: 10
-  _torque: 20
-  _maxTorqueBonus: 10
-  _maxJumpHeight: 5.5
-  _jumpForce: 2.5
-  _sideForce: 3
-  _bounceBackForce: 50
+  _maxAngularVelocity: 12.5
+  _torque: 30
+  _maxTorqueBonus: 15
+  _maxJumpHeight: 5.15
+  _jumpForce: 2.35
+  _sideForce: 1.95
+  _bounceBackForce: 45
   _projectileMoveSpeed: 7.5
   _projectilesCanRicochet: 0
   _projectilesCanGoTroughBodies: 0

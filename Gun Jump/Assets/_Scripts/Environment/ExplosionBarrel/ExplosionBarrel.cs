@@ -1,4 +1,5 @@
 using _Scripts.Audio;
+using _Scripts.Camera;
 using _Scripts.Interfaces;
 using _Scripts.Projectile;
 using UnityEngine;
@@ -24,6 +25,7 @@ namespace _Scripts.Environment.ExplosionBarrel
             ProjectilePool.Instance.ReturnToPool(projectile);
             Instantiate(_explosionEffectPrefab, transform.position, Quaternion.identity);
             ApplyHitOnHittableObjectInRadius(2f);
+            ScreenShake.Instance.ShakeCamera(1.35f, 0.3f);
             Destroy(gameObject);
         }
 
@@ -33,7 +35,8 @@ namespace _Scripts.Environment.ExplosionBarrel
             AudioController.Instance.PlaySound(_explosionAudioClip);
             Instantiate(_explosionEffectPrefab, transform.position, Quaternion.identity);
             ApplyHitOnHittableObjectInRadius(2f);
-            Destroy(gameObject);
+            ScreenShake.Instance.ShakeCamera(1.35f, 0.3f);
+            Destroy(gameObject);            
         }
 
         private void ApplyHitOnHittableObjectInRadius(float radius)

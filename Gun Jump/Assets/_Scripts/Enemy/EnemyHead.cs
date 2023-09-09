@@ -1,3 +1,4 @@
+using _Scripts.Camera;
 using _Scripts.Interfaces;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace _Scripts.Enemy
         {
             _enemy.EnemyHitEvent.CallEnemyHitEvent(true);
             _enemy.Rb.AddForce(projectile.transform.forward * _ragdollBounceBackForce, ForceMode.Impulse);
+            ScreenShake.Instance.ShakeCamera(1.25f, .25f);
         }
     }
 }

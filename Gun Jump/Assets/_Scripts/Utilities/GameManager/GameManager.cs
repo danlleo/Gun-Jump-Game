@@ -65,9 +65,6 @@ namespace _Scripts.Utilities.GameManager
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-                SaveLoaderController.DeleteSave();
-
             if (!PlayerInputHandler.IsMouseButtonDownThisFrame()) return;
             if (CurrentGameState == GameState.GAME_STARTED)
                 CurrentGameState = GameState.PLAYING_LEVEL;

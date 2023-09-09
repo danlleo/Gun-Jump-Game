@@ -1,3 +1,4 @@
+using _Scripts.Camera;
 using _Scripts.Interfaces;
 using _Scripts.Projectile;
 using UnityEngine;
@@ -22,7 +23,8 @@ namespace _Scripts.Enemy
             
             if (projectile.CanGoThroughBodies)
                 return;
-            
+
+            ScreenShake.Instance.ShakeCamera();
             ProjectilePool.Instance.ReturnToPool(projectile);
         }
     }

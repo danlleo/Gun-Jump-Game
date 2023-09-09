@@ -25,10 +25,6 @@ namespace _Scripts.Save
             string json = JsonUtility.ToJson(saveData);
 
             File.WriteAllText(s_saveFilePath, json);
-
-#if UNITY_EDITOR
-            Debug.Log("Game Saved");
-#endif
         }
 
         public static SaveData Load()
@@ -42,14 +38,10 @@ namespace _Scripts.Save
 
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
 
-#if UNITY_EDITOR
-            Debug.Log("Game Loaded");
-#endif
-
             return saveData;
         }
 
-        public static SaveData NewGame()
+        private static SaveData NewGame()
         {
             s_saveFilePath = Application.persistentDataPath + "/gunJumpSave.json";
 
@@ -79,12 +71,5 @@ namespace _Scripts.Save
 
         private static bool SaveExists()
             => File.Exists(s_saveFilePath);
-
-        // !!! REMOVE LATER !!!
-        public static void DeleteSave()
-        {
-            File.Delete(s_saveFilePath);
-            Debug.Log("Save deleted");
-        }
     }
 }

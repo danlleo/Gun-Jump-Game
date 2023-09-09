@@ -12,8 +12,9 @@ namespace _Scripts.Weapons
         [SerializeField] private AudioClip _shotClip;
         [SerializeField] private WeaponDetailsSO _sniperRifleDetails;
         [SerializeField] private WeaponSO _weaponSO;
+        [SerializeField] private ParticleSystem _muzzleFlashEffect;
         [SerializeField] private Transform _projectileSpawnPoint;
-
+        
         private Rigidbody _rb;
 
         private void Awake()
@@ -47,6 +48,7 @@ namespace _Scripts.Weapons
         {
             base.Fire();
 
+            _muzzleFlashEffect.Play();
             AudioController.Instance.PlaySound(_shotClip, .7f);
             
             var projectile = ProjectilePool.Instance.GetPooledObject();
